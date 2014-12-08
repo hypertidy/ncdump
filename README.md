@@ -59,6 +59,7 @@ These are features and tasks that I want done.
 
 ## Tasks
 
+- build a project to manage the different R packages for testing 
 - document v4 features available to ncdf4, ncdf and RNetCDF and what build options control different parts, include at least Thredds URL, with and without external compression, internal compression, tiling, groups, compound types and GMT variants. 
 - document what is provided by GDAL from the general v4 features above (groups?)
 - example suite for the use of RNetCDF(2.0) for compound types in the L3 bin files (including, can HDF5 provide some of the required support if built in??)
