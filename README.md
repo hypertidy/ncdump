@@ -4,9 +4,9 @@ There is a complicated and incomplete suite of NetCDF support in R with some cle
 
 ## NetCDF terminology
 
-* Groups - this is a NetCDF-4 feature, essentially allowing one file to contain multiple NetCDF-classic type files. 
-* Compound types - these are data types identical to structs. Portability across systems is the complicating factor for these. 
-* HDF5 - this is the grand-daddy library from which NetCDF-4 is derived. NetCDF-4 is a subset of HDF5, simplified in order to provide a system more like classic NetCDF but with new features - compression, tiling, groups, and compound types (others?). 
+* Groups: this is a NetCDF-4 feature, essentially allowing one file to contain multiple NetCDF-classic type files. 
+* Compound types:  these are data types identical to structs. Portability across systems is the complicating factor for these. 
+* HDF5:  this is the grand-daddy library from which NetCDF-4 is derived. NetCDF-4 is a subset of HDF5, simplified in order to provide a system more like classic NetCDF but with new features - compression, tiling, groups, and compound types (others?). 
 
 There is a complex set of overlapping support - HDF5 and NetCDF-4 can in some ways read each others data sources, but neither can read HDF4 and the use of groups and compound types is generally low, at least in the R-community. 
 
