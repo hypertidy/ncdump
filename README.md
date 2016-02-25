@@ -27,6 +27,15 @@ There is a complex set of overlapping support - HDF5 and NetCDF-4 can in some wa
 
 ## General support
 
+**NOTE** This content needs review in light of some changes on CRAN. 
+
+* CRAN now does support Windows ncdf4. 
+* Raster has dropped use of ncdf. 
+* RNetCDF also now includes explicit support for NetCDF-4
+
+More soon 
+
+
 RNetCDF and ncdf apparently lack some features for NetCDF version 4 (though it does build against it, including features for HDF4, HDF5, Thredds/OpenDAP). 
 There is currently (2014-12-08) no CRAN package for HDF, there have been h5r, rhdf5, and some packages use it internally (RcppArmadillo, others?), and there has been Windows binary support of some of these. rhdf5 is available on Bioconductor (and maybe others?)
 
