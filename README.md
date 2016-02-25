@@ -27,7 +27,7 @@ There is a complex set of overlapping support - HDF5 and NetCDF-4 can in some wa
 
 ## General support
 
-**NOTE** This content needs review in light of some changes on CRAN. 
+**NOTE** This content needs review in light of some changes on CRAN since December 2015. 
 
 * CRAN now does support Windows ncdf4. 
 * Raster has dropped use of ncdf. 
