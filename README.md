@@ -2,6 +2,16 @@
 
 There is a complicated and incomplete suite of NetCDF support in R with some clear missing functionality. Here we document the available support and outline some directions for improvement. 
 
+
+**NOTE** All content here needs review in light of some changes on CRAN since December 2015. 
+
+* CRAN now does support Windows ncdf4. 
+* Raster has dropped use of ncdf. 
+* RNetCDF also now includes explicit support for NetCDF-4
+
+More soon 
+
+
 ## NetCDF terminology
 
 * Groups: this is a NetCDF-4 feature, essentially allowing one file to contain multiple NetCDF-classic type files. 
@@ -27,13 +37,6 @@ There is a complex set of overlapping support - HDF5 and NetCDF-4 can in some wa
 
 ## General support
 
-**NOTE** This content needs review in light of some changes on CRAN since December 2015. 
-
-* CRAN now does support Windows ncdf4. 
-* Raster has dropped use of ncdf. 
-* RNetCDF also now includes explicit support for NetCDF-4
-
-More soon 
 
 
 RNetCDF and ncdf apparently lack some features for NetCDF version 4 (though it does build against it, including features for HDF4, HDF5, Thredds/OpenDAP). 
