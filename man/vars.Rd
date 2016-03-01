@@ -5,6 +5,8 @@
 \alias{atts.NetCDF}
 \alias{dims}
 \alias{dims.NetCDF}
+\alias{dimvars}
+\alias{dimvars.NetCDF}
 \alias{vars}
 \alias{vars.NetCDF}
 \title{NetCDF file description functions.}
@@ -17,9 +19,13 @@ dims(x, ...)
 
 \method{dims}{NetCDF}(x, ...)
 
+dimvars(x, ...)
+
+\method{dimvars}{NetCDF}(x, ...)
+
 atts(x, ...)
 
-\method{atts}{NetCDF}(x, ...)
+\method{atts}{NetCDF}(x, varname = "globalatts", ...)
 }
 \description{
 NetCDF file description functions.

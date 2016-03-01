@@ -2,11 +2,13 @@
 
 S3method(atts,NetCDF)
 S3method(dims,NetCDF)
+S3method(dimvars,NetCDF)
 S3method(print,NetCDF_attributes)
 S3method(vars,NetCDF)
 export(NetCDF)
 export(atts)
 export(dims)
+export(dimvars)
 export(vars)
 importFrom(dplyr,as_data_frame)
 importFrom(dplyr,bind_rows)

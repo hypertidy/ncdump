@@ -1,5 +1,47 @@
 # R And NetCDF Interface Development
 
+The `rancid` package aims to simplify and systematize read-access to NetCDF in R. 
+
+The basic workflow hides the underlying details of calls to the NetCDF API. 
+
+Create an object that has a complete description of the file so that we can easily see the available variables (`vars`) and dimensions (`dims`), and perform queries that find the details we need in the form that we want, rather than just printed out on the screen. 
+
+```R
+library(rancid)
+ifile <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "rancid")
+nc <- NetCDF(ifile)
+
+vars(nc)
+
+dims(nc)
+
+## perform a join of variable to dimension, keeping only the varname and id
+vars(nc) %>% filter(name == "chlor_a") %>% transmute(varname = name, id) %>%  inner_join(nc$vardim, "id") %>% inner_join(dims(nc), c("dimids" = "id"))
+Source: local data frame [2 x 9]
+
+  varname    id dimids  name   len unlim group_index group_id create_dimvar
+    (chr) (dbl)  (int) (chr) (int) (lgl)       (int)    (int)         (lgl)
+1 chlor_a     0      1   lon  4320 FALSE           1    65536          TRUE
+2 chlor_a     0      0   lat  2160 FALSE           1    65536          TRU
+```
+<!--
+```{r,echo=FALSE,eval=FALSE}
+We can use this to build tools for simplified access, maybe.
+getvar3d <- function(filename, varname) {
+  meta <- NetCDF(filename)
+  v <- vars(meta) %>% filter(name == varname) 
+  dd <- v %>% transmute(varname = name, id) %>%  inner_join(meta$vardim, "id") %>% inner_join(dims(meta), c("dimids" = "id")) ## order by v list
+  typ <- list(float = numeric, double = numeric, int = integer)[[v$prec]]
+  val <- typ(1)
+  var <- array(val, c(dd$len, nrow(meta$file)))
+  for (ii in seq(nrow(meta$file))) {
+    var[,,ii] <- ncdf4::ncvar_get(ncdf4::open_nc(meta$file$filename[ii]), varname)
+  }
+  
+}
+```
+-->
+
 There is a complicated and incomplete suite of NetCDF support in R with some clear missing functionality. Here we document the available support and outline some directions for improvement. 
 
 
