@@ -1,4 +1,4 @@
-
+library(testthat)
 if (Sys.info()["nodename"] == "ace-ecostats") {
 romsfile <- file.path("/mnt/mertzdata/mdl/mer015_1", c("mer_his_0001.nc", "mer_his_0002.nc", "mer_his_0576.nc"))
 
@@ -24,4 +24,11 @@ expect_that(roms1[[5]], equals(roms2[[5]]))
 expect_that(roms1[[6]], equals(roms2[[6]]))
 expect_that(roms1[[7]], equals(roms2[[7]]))
 expect_that(roms1[[8]], equals(roms2[[8]]))
+
+rfile <- "/rdsi/PRIVATE/data_local/acecrc.org.au/ROMS/s_corney/cpolar/ocean_his_3101.nc"
+expect_silent(NetCDF(rfile))
+
 }
+
+
+
