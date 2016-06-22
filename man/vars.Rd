@@ -27,6 +27,13 @@ atts(x, ...)
 
 \method{atts}{NetCDF}(x, varname = "globalatts", ...)
 }
+\arguments{
+\item{x}{NetCDF metadata object}
+
+\item{...}{ignored}
+
+\item{varname}{name of variable to get atts of (not yet implemented)}
+}
 \description{
 NetCDF file description functions.
 }
