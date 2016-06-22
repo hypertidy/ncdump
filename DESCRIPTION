@@ -14,3 +14,4 @@ Imports:
     ncdf4
 RoxygenNote: 5.0.1
 Suggests: testthat
+SystemRequirements: libnetcdf-dev
