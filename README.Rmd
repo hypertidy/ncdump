@@ -12,6 +12,11 @@ knitr::opts_chunk$set(
 )
 ```
 
+[![Travis-CI Build Status](https://travis-ci.org/mdsumner/rancid.svg?branch=master)](https://travis-ci.org/mdsumner/rancid)
+
+[![Coverage Status](https://img.shields.io/codecov/c/github/mdsumner/rancid/master.svg)](https://codecov.io/github/mdsumner/rancid?branch=master)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/rancid)](https://cran.r-project.org/package=rancid)
+
 
 # R And NetCDF Interface Development
 
@@ -22,7 +27,9 @@ The basic workflow hides the underlying details of calls to the NetCDF API.
 Create an object that has a complete description of the file so that we can easily see the available variables (`vars`) and dimensions (`dims`), and perform queries that find the details we need in the form that we want, rather than just printed out on the screen. 
 
 ```{r}
+library(dplyr)
 library(rancid)
+
 ifile <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "rancid")
 nc <- NetCDF(ifile)
 ```

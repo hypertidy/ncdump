@@ -13,5 +13,6 @@ Imports:
     dplyr,
     ncdf4
 RoxygenNote: 5.0.1
-Suggests: testthat
+Suggests: testthat,
+    covr
 SystemRequirements: libnetcdf-dev netcdf-bin
