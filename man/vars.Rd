@@ -33,8 +33,7 @@ atts(x, ...)
 \item{...}{ignored}
 
 \item{varname}{name of variable to get atts of (not yet implemented)}
-}
-\arguments{
+
 \item{x}{NetCDF metadata object}
 
 \item{...}{ignored}
