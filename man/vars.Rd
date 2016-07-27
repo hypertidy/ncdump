@@ -5,6 +5,8 @@
 \alias{atts.NetCDF}
 \alias{dims}
 \alias{dims.NetCDF}
+\alias{dimvars}
+\alias{dimvars.NetCDF}
 \alias{vars}
 \alias{vars.NetCDF}
 \title{NetCDF file description functions.}
@@ -17,9 +19,20 @@ dims(x, ...)
 
 \method{dims}{NetCDF}(x, ...)
 
+dimvars(x, ...)
+
+\method{dimvars}{NetCDF}(x, ...)
+
 atts(x, ...)
 
-\method{atts}{NetCDF}(x, ...)
+\method{atts}{NetCDF}(x, varname = "globalatts", ...)
+}
+\arguments{
+\item{x}{NetCDF metadata object}
+
+\item{...}{ignored}
+
+\item{varname}{name of variable to get atts of (not yet implemented)}
 }
 \arguments{
 \item{x}{NetCDF metadata object}
