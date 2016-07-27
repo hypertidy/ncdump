@@ -21,6 +21,11 @@ atts(x, ...)
 
 \method{atts}{NetCDF}(x, ...)
 }
+\arguments{
+\item{x}{NetCDF metadata object}
+
+\item{...}{ignored}
+}
 \description{
 NetCDF file description functions.
 }
