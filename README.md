@@ -1,3 +1,8 @@
+[![Travis-CI Build Status](https://travis-ci.org/mdsumner/rancid.svg?branch=master)](https://travis-ci.org/mdsumner/rancid)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/mdsumner/rancid?branch=master&svg=true)](https://ci.appveyor.com/project/mdsumner/rancid)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/rancid)](https://cran.r-project.org/package=rancid)
+[![Coverage Status](https://img.shields.io/codecov/c/github/mdsumner/rancid/master.svg)](https://codecov.io/github/mdsumner/rancid?branch=master)
+
 # R And NetCDF Interface Development
 
 There is a complicated and incomplete suite of NetCDF support in R with some clear missing functionality. Here we document the available support and outline some directions for improvement. 
