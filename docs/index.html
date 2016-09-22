@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>Home. rancid 0.0.2.9000</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="index.html">rancid 0.0.2.9000</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="reference.html">Reference</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <div class="row">
+  <div class="span8">
+    <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+<p><a href="https://travis-ci.org/mdsumner/rancid"><img src="https://travis-ci.org/mdsumner/rancid.svg?branch=master" alt="Travis-CI Build Status"/></a> <a href="https://ci.appveyor.com/project/mdsumner/rancid"><img src="https://ci.appveyor.com/api/projects/status/github/mdsumner/rancid?branch=master&amp;svg=true" alt="AppVeyor Build Status"/></a> <a href="https://codecov.io/github/mdsumner/rancid?branch=master"><img src="https://img.shields.io/codecov/c/github/mdsumner/rancid/master.svg" alt="Coverage Status"/></a></p>
+
+<h1>R And NetCDF Interface Development</h1>
+
+<p>The <code>rancid</code> package aims to simplify and systematize read-access to NetCDF in R.</p>
+
+<p>The basic workflow hides the underlying details of calls to the NetCDF API.</p>
+
+<p>Create an object that has a complete description of the file so that we can easily see the available variables (<code>vars</code>) and dimensions (<code>dims</code>), and perform queries that find the details we need in the form that we want, rather than just printed out on the screen.</p>
+
+<pre><code class="r">library(dplyr)
+library(rancid)
+
+ifile &lt;- system.file(&quot;extdata&quot;, &quot;S2008001.L3m_DAY_CHL_chlor_a_9km.nc&quot;, package = &quot;rancid&quot;)
+nc &lt;- NetCDF(ifile)
+</code></pre>
+
+<pre><code class="r">## tidyverse steals a name again
+rancid::vars(nc)
+#&gt; # A tibble: 2 × 18
+#&gt;      name ndims natts          prec   units
+#&gt;     &lt;chr&gt; &lt;int&gt; &lt;int&gt;         &lt;chr&gt;   &lt;chr&gt;
+#&gt; 1 chlor_a     2    12         float mg m^-3
+#&gt; 2 palette     2     0 unsigned byte        
+#&gt; # ... with 13 more variables: longname &lt;chr&gt;, group_index &lt;int&gt;,
+#&gt; #   storage &lt;int&gt;, shuffle &lt;int&gt;, compression &lt;int&gt;, unlim &lt;lgl&gt;,
+#&gt; #   make_missing_value &lt;lgl&gt;, missval &lt;dbl&gt;, hasAddOffset &lt;lgl&gt;,
+#&gt; #   addOffset &lt;dbl&gt;, hasScaleFact &lt;lgl&gt;, scaleFact &lt;dbl&gt;, id &lt;dbl&gt;
+
+dims(nc)
+#&gt; # A tibble: 4 × 7
+#&gt;            name   len unlim group_index group_id    id create_dimvar
+#&gt;           &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;       &lt;int&gt;    &lt;int&gt; &lt;int&gt;         &lt;lgl&gt;
+#&gt; 1           lat  2160 FALSE           1    65536     0          TRUE
+#&gt; 2           lon  4320 FALSE           1    65536     1          TRUE
+#&gt; 3           rgb     3 FALSE           1    65536     2         FALSE
+#&gt; 4 eightbitcolor   256 FALSE           1    65536     3         FALSE
+
+## perform a join of variable to dimension, keeping only the varname and id
+rancid::vars(nc) %&gt;% dplyr::filter(name == &quot;chlor_a&quot;) %&gt;% transmute(varname = name, id) %&gt;%  inner_join(nc$vardim, &quot;id&quot;) %&gt;% inner_join(dims(nc), c(&quot;dimids&quot; = &quot;id&quot;))
+#&gt; # A tibble: 2 × 9
+#&gt;   varname    id dimids  name   len unlim group_index group_id
+#&gt;     &lt;chr&gt; &lt;dbl&gt;  &lt;int&gt; &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;       &lt;int&gt;    &lt;int&gt;
+#&gt; 1 chlor_a     0      1   lon  4320 FALSE           1    65536
+#&gt; 2 chlor_a     0      0   lat  2160 FALSE           1    65536
+#&gt; # ... with 1 more variables: create_dimvar &lt;lgl&gt;
+</code></pre>
+
+<!--
+
+-->
+
+<p>There is a complicated and incomplete suite of NetCDF support in R with some clear missing functionality. Here we document the available support and outline some directions for improvement.</p>
+
+<p><strong>NOTE</strong> All content here needs review in light of some changes on CRAN since December 2015.</p>
+
+<ul>
+<li>  CRAN now does support Windows ncdf4.</li>
+<li>  Raster has dropped use of ncdf.</li>
+<li>  RNetCDF also now includes explicit support for NetCDF-4</li>
+<li>  HDF4 is off my radar as NASA ocean colour have moved to NetCDF-4</li>
+<li>  Pretty much this will all be covered by R-hub</li>
+</ul>
+
+<p>More soon</p>
+
+<h2>NetCDF terminology</h2>
+
+<ul>
+<li>  Groups: this is a NetCDF-4 feature, essentially allowing one file to contain multiple NetCDF-classic type files.</li>
+<li>  Compound types: these are data types identical to structs. Portability across systems is the complicating factor for these.</li>
+<li>  HDF5: this is the grand-daddy library from which NetCDF-4 is derived. NetCDF-4 is a subset of HDF5, simplified in order to provide a system more like classic NetCDF but with new features - compression, tiling, groups, and compound types (others?).</li>
+</ul>
+
+<p>There is a complex set of overlapping support - HDF5 and NetCDF-4 can in some ways read each others data sources, but neither can read HDF4 and the use of groups and compound types is generally low, at least in the R-community.</p>
+
+<h2>Links</h2>
+
+<ul>
+<li>  The roc package for HDF4 L3bin files in R: <a href="https://github.com/mdsumner/roc">https://github.com/mdsumner/roc</a></li>
+<li>  Geospatial Data Abstraction Library (GDAL): <a href="http://www.gdal.org">http://www.gdal.org</a></li>
+<li>  Open Source Geospatial for Windows (OSGeo4W): <a href="http://trac.osgeo.org/osgeo4w/">http://trac.osgeo.org/osgeo4w/</a></li>
+<li>  Build notes:</li>
+<li>  <a href="http://scigeo.org/articles/howto-install-latest-geospatial-software-on-linux.html">http://scigeo.org/articles/howto-install-latest-geospatial-software-on-linux.html</a></li>
+<li>  <a href="https://github.com/mdsumner/nectar">https://github.com/mdsumner/nectar</a></li>
+<li>  RNetCDF 2.0 fork:</li>
+<li>  <a href="https://github.com/BertrandBrelier/RNetCDF">https://github.com/BertrandBrelier/RNetCDF</a></li>
+<li>  <a href="http://wiki.scinethpc.ca/wiki/images/3/3c/NetCDF.pdf">http://wiki.scinethpc.ca/wiki/images/3/3c/NetCDF.pdf</a></li>
+<li>  ncdf4: <a href="http://cirrus.ucsd.edu/%7Epierce/ncdf/">http://cirrus.ucsd.edu/~pierce/ncdf/</a></li>
+</ul>
+
+<h2>General support</h2>
+
+<p>RNetCDF and ncdf apparently lack some features for NetCDF version 4 (though it does build against it, including features for HDF4, HDF5, Thredds/OpenDAP). There is currently (2014-12-08) no CRAN package for HDF, there have been h5r, rhdf5, and some packages use it internally (RcppArmadillo, others?), and there has been Windows binary support of some of these. rhdf5 is available on Bioconductor (and maybe others?)</p>
+
+<p>rgdal2 is another complication, not yet on CRAN and with no support for building on Windows - it requires gdal-config installed, and so it might work if GDAL was built from source with all utilities using MingW. (?)</p>
+
+<h2>Windows support</h2>
+
+<p>NetCDF on CRAN is stuck at version 3, only ncdf and RNetCDF are integrated with the &ldquo;win-builder&rdquo; on CRAN, so they get identical binary versions of the library. GDAL on CRAN does not include NetCDF (either version 3 or 4, or HDF4 or HDF5)</p>
+
+<h2>Non-R support</h2>
+
+<p>OSGeo4W provides binaries for NetCDF4, HDF4, HDF5, OpenDAP Thredds but rgdal cannot be easily built with these (*need details about the compiler/s used for OSGeo4W), it can all be done with MinGW but the final packaging on Windows to R is done via cross-compilation for CRAN.</p>
+
+<p>Utilities ncdump and vdp allow &ldquo;dumping&rdquo; of files to either text or binary format, which provides a workaround as do tools like the GDAL utilities, but the aim here is for tight coupling to make things simpler and more flexible in R directly.</p>
+
+<h2>Specific projects</h2>
+
+<p>ncdf4 has author-hosted Windows binaries, but these do not currently support compound types.</p>
+
+<p>RNetCDF has been forked for compound types by Bertran Brelier, but this package does not provide documentation and is not synchronized with a newer release of RNetCDF.</p>
+
+<h2>Requirements</h2>
+
+<p>These are features and tasks that I want done.</p>
+
+<ol>
+<li> Ability to read NASA L3 bin files from the new NetCDF-4 format. This format includes both groups and compound types. Essentially it&#39;s a data.frame of bin number, weights, variable sum and ssq, a few other one-to-one matching values and small amount of global metadata such as &ldquo;number of rows&rdquo; for the sinusoidal grid, Sensor name, date, etc. This is done by the rrshdf4 package for the old HDF4 format, and provided via the roc package.</li>
+<li> Support for NetCDF4 in the CRAN Windows builds, or a systematic replacement for CRAN that allows provision of identical features on Linux and Windows.</li>
+<li> Rationalization of the NetCDF support provided in the R packages. Raster does not use GDAL to read NetCDF but provides its own interface either via ncdf or ncdf4. This should be able to use RNetCDF as an alternative, including whether v3 or v4 is available. Ultimately it would be preferable that GDAL understood the workarounds in raster, so then it could be used instead with the advantage that non-R languages would gain the same extra functionality.</li>
+<li> A smarter R interface for NetCDF files. This would avoid the need for raw file connections and matching attributes, dimensions and variables. Rather, you would request a variable from a source and all that stuff would be sorted out. Ideal would be with demand-paged streaming and with options for different downstream formats - either raster or other Spatial objects, via other converters.</li>
+</ol>
+
+<h2>Tasks</h2>
+
+<ul>
+<li>  build a project to manage the different R packages for testing</li>
+<li>  document v4 features available to ncdf4, ncdf and RNetCDF and what build options control different parts, include at least Thredds URL, with and without external compression, internal compression, tiling, groups, compound types and GMT variants.</li>
+<li>  document what is provided by GDAL from the general v4 features above (groups?)</li>
+<li>  example suite for the use of RNetCDF(2.0) for compound types in the L3 bin files (including, can HDF5 provide some of the required support if built in??)</li>
+<li>  define a pathway for extending ncdf4 to include compound types (just one level is sufficient if the recursive need is too hard)</li>
+</ul>
+
+<h2>Related projects</h2>
+
+<p>rgdal2, ff, dplyr, data.table and raster are examples for supporting demand-paged data read.</p>
+
+  </div>
+
+  <div class="span3 offset1 sidebar">
+        <h2>Authors</h2>
+    <ul>
+      <li><a href='mailto:mdsumner@gmail.com'>Michael D. Sumner</a> [aut, cre]</li>
+    </ul>
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

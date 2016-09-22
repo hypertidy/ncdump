@@ -1,8 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Travis-CI Build Status](https://travis-ci.org/mdsumner/rancid.svg?branch=master)](https://travis-ci.org/mdsumner/rancid)
-
-[![Coverage Status](https://img.shields.io/codecov/c/github/mdsumner/rancid/master.svg)](https://codecov.io/github/mdsumner/rancid?branch=master) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/rancid)](https://cran.r-project.org/package=rancid)
+[![Travis-CI Build Status](https://travis-ci.org/mdsumner/rancid.svg?branch=master)](https://travis-ci.org/mdsumner/rancid) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/mdsumner/rancid?branch=master&svg=true)](https://ci.appveyor.com/project/mdsumner/rancid) [![Coverage Status](https://img.shields.io/codecov/c/github/mdsumner/rancid/master.svg)](https://codecov.io/github/mdsumner/rancid?branch=master)
 
 R And NetCDF Interface Development
 ==================================
@@ -15,52 +13,42 @@ Create an object that has a complete description of the file so that we can easi
 
 ``` r
 library(dplyr)
-#> 
-#> Attaching package: 'dplyr'
-#> The following objects are masked from 'package:stats':
-#> 
-#>     filter, lag
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, setdiff, setequal, union
 library(rancid)
-#> 
-#> Attaching package: 'rancid'
-#> The following object is masked from 'package:dplyr':
-#> 
-#>     vars
 
 ifile <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "rancid")
 nc <- NetCDF(ifile)
 ```
 
 ``` r
-vars(nc)
+## tidyverse steals a name again
+rancid::vars(nc)
+#> # A tibble: 2 × 18
 #>      name ndims natts          prec   units
+#>     <chr> <int> <int>         <chr>   <chr>
 #> 1 chlor_a     2    12         float mg m^-3
 #> 2 palette     2     0 unsigned byte        
-#>                                   longname group_index storage shuffle
-#> 1 Chlorophyll Concentration, OCI Algorithm           1       2       0
-#> 2                                  palette           1       1       0
-#>   compression unlim make_missing_value missval hasAddOffset addOffset
-#> 1           4 FALSE               TRUE  -32767         TRUE         0
-#> 2          NA FALSE              FALSE      NA        FALSE        NA
-#>   hasScaleFact scaleFact id
-#> 1         TRUE         1  0
-#> 2        FALSE        NA  3
+#> # ... with 13 more variables: longname <chr>, group_index <int>,
+#> #   storage <int>, shuffle <int>, compression <int>, unlim <lgl>,
+#> #   make_missing_value <lgl>, missval <dbl>, hasAddOffset <lgl>,
+#> #   addOffset <dbl>, hasScaleFact <lgl>, scaleFact <dbl>, id <dbl>
 
 dims(nc)
-#>            name  len unlim group_index group_id id create_dimvar
-#> 1           lat 2160 FALSE           1    65536  0          TRUE
-#> 2           lon 4320 FALSE           1    65536  1          TRUE
-#> 3           rgb    3 FALSE           1    65536  2         FALSE
-#> 4 eightbitcolor  256 FALSE           1    65536  3         FALSE
+#> # A tibble: 4 × 7
+#>            name   len unlim group_index group_id    id create_dimvar
+#>           <chr> <int> <lgl>       <int>    <int> <int>         <lgl>
+#> 1           lat  2160 FALSE           1    65536     0          TRUE
+#> 2           lon  4320 FALSE           1    65536     1          TRUE
+#> 3           rgb     3 FALSE           1    65536     2         FALSE
+#> 4 eightbitcolor   256 FALSE           1    65536     3         FALSE
 
 ## perform a join of variable to dimension, keeping only the varname and id
-vars(nc) %>% filter(name == "chlor_a") %>% transmute(varname = name, id) %>%  inner_join(nc$vardim, "id") %>% inner_join(dims(nc), c("dimids" = "id"))
-#>   varname id dimids name  len unlim group_index group_id create_dimvar
-#> 1 chlor_a  0      1  lon 4320 FALSE           1    65536          TRUE
-#> 2 chlor_a  0      0  lat 2160 FALSE           1    65536          TRUE
+rancid::vars(nc) %>% dplyr::filter(name == "chlor_a") %>% transmute(varname = name, id) %>%  inner_join(nc$vardim, "id") %>% inner_join(dims(nc), c("dimids" = "id"))
+#> # A tibble: 2 × 9
+#>   varname    id dimids  name   len unlim group_index group_id
+#>     <chr> <dbl>  <int> <chr> <int> <lgl>       <int>    <int>
+#> 1 chlor_a     0      1   lon  4320 FALSE           1    65536
+#> 2 chlor_a     0      0   lat  2160 FALSE           1    65536
+#> # ... with 1 more variables: create_dimvar <lgl>
 ```
 
 <!--
@@ -73,6 +61,8 @@ There is a complicated and incomplete suite of NetCDF support in R with some cle
 -   CRAN now does support Windows ncdf4.
 -   Raster has dropped use of ncdf.
 -   RNetCDF also now includes explicit support for NetCDF-4
+-   HDF4 is off my radar as NASA ocean colour have moved to NetCDF-4
+-   Pretty much this will all be covered by R-hub
 
 More soon
 

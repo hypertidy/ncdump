@@ -13,8 +13,8 @@ knitr::opts_chunk$set(
 ```
 
 [![Travis-CI Build Status](https://travis-ci.org/mdsumner/rancid.svg?branch=master)](https://travis-ci.org/mdsumner/rancid)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/mdsumner/rancid?branch=master&svg=true)](https://ci.appveyor.com/project/mdsumner/rancid)
 [![Coverage Status](https://img.shields.io/codecov/c/github/mdsumner/rancid/master.svg)](https://codecov.io/github/mdsumner/rancid?branch=master)
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/rancid)](https://cran.r-project.org/package=rancid)
 
 
 # R And NetCDF Interface Development
@@ -35,12 +35,13 @@ nc <- NetCDF(ifile)
 
 
 ```{r}
-vars(nc)
+## tidyverse steals a name again
+rancid::vars(nc)
 
 dims(nc)
 
 ## perform a join of variable to dimension, keeping only the varname and id
-vars(nc) %>% filter(name == "chlor_a") %>% transmute(varname = name, id) %>%  inner_join(nc$vardim, "id") %>% inner_join(dims(nc), c("dimids" = "id"))
+rancid::vars(nc) %>% dplyr::filter(name == "chlor_a") %>% transmute(varname = name, id) %>%  inner_join(nc$vardim, "id") %>% inner_join(dims(nc), c("dimids" = "id"))
 ```
 <!--
 ```{r,echo=FALSE,eval=FALSE}
