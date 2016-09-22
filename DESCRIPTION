@@ -1,6 +1,6 @@
 Package: rancid
 Title: R and NetCDF Interface Development
-Version: 0.0.1.9000
+Version: 0.0.2.9000
 Authors@R: person("Michael D.","Sumner", role = c("aut", "cre"), email =
     "mdsumner@gmail.com")
 Description: Tools for in R to provide a single and simple front-end for using
