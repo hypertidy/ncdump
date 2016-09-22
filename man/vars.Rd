@@ -33,6 +33,10 @@ atts(x, ...)
 \item{...}{ignored}
 
 \item{varname}{name of variable to get atts of (not yet implemented)}
+
+\item{x}{NetCDF metadata object}
+
+\item{...}{ignored}
 }
 \description{
 NetCDF file description functions.

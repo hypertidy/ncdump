@@ -13,7 +13,6 @@ knitr::opts_chunk$set(
 ```
 
 [![Travis-CI Build Status](https://travis-ci.org/mdsumner/rancid.svg?branch=master)](https://travis-ci.org/mdsumner/rancid)
-
 [![Coverage Status](https://img.shields.io/codecov/c/github/mdsumner/rancid/master.svg)](https://codecov.io/github/mdsumner/rancid?branch=master)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/rancid)](https://cran.r-project.org/package=rancid)
 

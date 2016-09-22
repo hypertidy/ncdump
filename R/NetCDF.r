@@ -51,6 +51,9 @@ ncatts <- function(x) {
 #' @export
 #' @importFrom ncdf4 nc_open
 #' @importFrom dplyr as_data_frame bind_rows data_frame 
+#' @examples 
+#' rnc <- NetCDF(system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package= "rancid"))
+#' rnc
 NetCDF <- function(x) {
   nc <- ncdf4::nc_open(x)
   dims <- do.call(dplyr::bind_rows, lapply(nc$dim, function(x) dplyr::as_data_frame(x[!names(x) %in% c("dimvarid", "vals", "units", "calendar")])))
@@ -93,6 +96,8 @@ print.NetCDF_attributes <- function(x, ...) {
 }
 
 #' NetCDF file description functions. 
+#' @param x NetCDF metadata object
+#' @param ... ignored
 #' @rdname vars
 #' @param x NetCDF metadata object
 #' @param ... ignored
@@ -158,9 +163,10 @@ atts.NetCDF <- function(x, varname = "globalatts", ...) {
   }
 }
 
+#' @importFrom dplyr filter_
 "[[.NetCDF" <- function(x,i,j,...,drop=TRUE) {
-  var <-  x$variable %>% filter_(.dots = list(~name == i))
-  class(var) <- c("NetCDFVariable", class(var))
+  var <-  filter_(x$variable, .dots = list(~name == i))
+ class(var) <- c("NetCDFVariable", class(var))
   var
 }
 
