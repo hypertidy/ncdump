@@ -1,9 +1,12 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
 language: R
-sudo: false
+sudo: required
 cache: packages
 
 
 after_success:
   - Rscript -e 'covr::codecov()'
+
+r_binary_packages:
+  - ncdf4
