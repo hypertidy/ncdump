@@ -40,7 +40,7 @@ nc::vars(con)
 dims(con)
 
 ## perform a join of variable to dimension, keeping only the varname and id
-nc::vars(con) %>% dplyr::filter(name == "chlor_a") %>% transmute(varname = name, id) %>%  inner_join(nc$vardim, "id") %>% inner_join(dims(nc), c("dimids" = "id"))
+nc::vars(con) %>% dplyr::filter(name == "chlor_a") %>% transmute(varname = name, id) %>%  inner_join(con$vardim, "id") %>% inner_join(dims(con), c("dimids" = "id"))
 ```
 <!--
 ```{r,echo=FALSE,eval=FALSE}
