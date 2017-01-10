@@ -2,8 +2,8 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 [![Travis-CI Build Status](https://travis-ci.org/r-gris/nc.svg?branch=master)](https://travis-ci.org/r-gris/nc) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/r-gris/nc?branch=master&svg=true)](https://ci.appveyor.com/project/r-gris/nc) [![Coverage Status](https://img.shields.io/codecov/c/github/r-gris/nc/master.svg)](https://codecov.io/github/r-gris/nc?branch=master)
 
-R And NetCDF Interface Development
-==================================
+NetCDF metadata in tables in R
+==============================
 
 The `nc` package aims to simplify and systematize read-access to NetCDF in R.
 

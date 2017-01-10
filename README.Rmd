@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 [![Coverage Status](https://img.shields.io/codecov/c/github/r-gris/nc/master.svg)](https://codecov.io/github/r-gris/nc?branch=master)
 
 
-# R And NetCDF Interface Development
+# NetCDF metadata in tables in R
 
 The `nc` package aims to simplify and systematize read-access to NetCDF in R. 
 
