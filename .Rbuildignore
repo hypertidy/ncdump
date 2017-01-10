@@ -8,4 +8,4 @@
 ^codecov\.yml$
 ^cran-comments\.md$
 ^prepare_package.r$
-^docs$
+docs
