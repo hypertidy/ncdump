@@ -1,4 +1,4 @@
 library(testthat)
-library(rancid)
+library(nc)
 
-test_check("rancid")
+test_check("nc")

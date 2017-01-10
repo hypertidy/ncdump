@@ -5,7 +5,7 @@
 R And NetCDF Interface Development
 ==================================
 
-The `rancid` package aims to simplify and systematize read-access to NetCDF in R.
+The `nc` package aims to simplify and systematize read-access to NetCDF in R.
 
 The basic workflow hides the underlying details of calls to the NetCDF API.
 

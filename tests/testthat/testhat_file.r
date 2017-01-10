@@ -2,7 +2,7 @@ library(testthat)
 if (Sys.info()["nodename"] == "ace-ecostats") {
 romsfile <- file.path("/mnt/mertzdata/mdl/mer015_1", c("mer_his_0001.nc", "mer_his_0002.nc", "mer_his_0576.nc"))
 
-library(rancid)
+library(nc)
 roms1 <- NetCDF(romsfile[1])
 roms2 <- NetCDF(romsfile[2])
 roms3 <- NetCDF(romsfile[3])
