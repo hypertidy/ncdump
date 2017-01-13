@@ -2,7 +2,7 @@ library(ncdump)
 library(testthat)
 context("Basic read")
 
-ifile <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "nc")
+ifile <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncdump")
 con <- NetCDF(ifile)
 test_that("File exists and can be read", {
   expect_true(file.exists(ifile))

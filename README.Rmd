@@ -4,12 +4,15 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, message=FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "README-"
 )
+library(dplyr)
+library(ncdump)
+
 ```
 
 [![Travis-CI Build Status](https://travis-ci.org/r-gris/ncdump.svg?branch=master)](https://travis-ci.org/r-gris/ncdump)
@@ -19,11 +22,13 @@ knitr::opts_chunk$set(
 
 # NetCDF metadata in tables in R
 
-The `ncdump` package aims to simplify and systematize read-access to NetCDF in R. 
+The `ncdump` package aims to simplify and systematize read-access to NetCDF in R.
 
-The basic workflow hides the underlying details of calls to the NetCDF API. 
+Currently the only functionality is to return the complete file metadata in tidy form, and some experimental function to return specific tables. 
 
-Create an object that has a complete description of the file so that we can easily see the available variables (`vars`) and dimensions (`dims`), and perform queries that find the details we need in the form that we want, rather than just printed out on the screen. 
+The `ncdump` philosophy is to hide the underlying details of calls to the NetCDF API and provide wrappers to do those operations. 
+
+Create an object that has a complete description of the file so that we can easily see the available **variables** and **dimensions** and **attributes**, and perform queries that find the details we need in a form we can used, rather than just printed out on the screen. 
 
 ```{r}
 library(dplyr)
@@ -33,29 +38,22 @@ ifile <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package =
 con <- NetCDF(ifile)
 ```
 
+Note that this is just the *metadata* in the file, but we've organized it into a tidy list of tables so we can use it. 
+
+It looks good when we print those tables out, and it's pretty clear how we can use this information to drive the reader functions in the API packages. 
 
 ```{r}
-ncdump::vars(con)
-
-dims(con)
-
-## perform a join of variable to dimension, keeping only the varname and id
-ncdump::vars(con) %>% dplyr::filter(name == "chlor_a") %>% transmute(varname = name, id) %>%  inner_join(con$vardim, "id") %>% inner_join(dims(con), c("dimids" = "id"))
-```
-<!--
-```{r,echo=FALSE,eval=FALSE}
-We can use this to build tools for simplified access, maybe.
-getvar3d <- function(filename, varname) {
-  meta <- NetCDF(filename)
-  v <- vars(meta) %>% filter(name == varname) 
-  dd <- v %>% transmute(varname = name, id) %>%  inner_join(meta$vardim, "id") %>% inner_join(dims(meta), c("dimids" = "id")) ## order by v list
-  typ <- list(float = numeric, double = numeric, int = integer)[[v$prec]]
-  val <- typ(1)
-  var <- array(val, c(dd$len, nrow(meta$file)))
-  for (ii in seq(nrow(meta$file))) {
-    var[,,ii] <- ncdf4::ncvar_get(ncdf4::open_nc(meta$file$filename[ii]), varname)
-  }
-  
+for (i in seq_along(con)) {
+  print(names(con)[i])
+  print(con[[i]])
 }
 ```
--->
+
+
+## Development
+
+A format method for the object above could recreate the print out you see from ncdump itself. 
+
+A future package may wrap the various NetCDF R packages to do the actual read, but each is useful in different ways. The main ones are `RNetCDF`, `ncdf4` and `rhdf5` (Bioconductor). 
+
+
