@@ -1,4 +1,4 @@
-library(nc)
+library(ncdump)
 library(testthat)
 context("Basic read")
 

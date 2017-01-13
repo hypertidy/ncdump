@@ -12,14 +12,14 @@ knitr::opts_chunk$set(
 )
 ```
 
-[![Travis-CI Build Status](https://travis-ci.org/r-gris/nc.svg?branch=master)](https://travis-ci.org/r-gris/nc)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/r-gris/nc?branch=master&svg=true)](https://ci.appveyor.com/project/r-gris/nc)
-[![Coverage Status](https://img.shields.io/codecov/c/github/r-gris/nc/master.svg)](https://codecov.io/github/r-gris/nc?branch=master)
+[![Travis-CI Build Status](https://travis-ci.org/r-gris/ncdump.svg?branch=master)](https://travis-ci.org/r-gris/ncdump)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/r-gris/ncdump?branch=master&svg=true)](https://ci.appveyor.com/project/r-gris/ncdump)
+[![Coverage Status](https://img.shields.io/codecov/c/github/r-gris/ncdump/master.svg)](https://codecov.io/github/r-gris/ncdump?branch=master)
 
 
 # NetCDF metadata in tables in R
 
-The `nc` package aims to simplify and systematize read-access to NetCDF in R. 
+The `ncdump` package aims to simplify and systematize read-access to NetCDF in R. 
 
 The basic workflow hides the underlying details of calls to the NetCDF API. 
 
@@ -27,20 +27,20 @@ Create an object that has a complete description of the file so that we can easi
 
 ```{r}
 library(dplyr)
-library(nc)
+library(ncdump)
 
-ifile <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "nc")
+ifile <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncdump")
 con <- NetCDF(ifile)
 ```
 
 
 ```{r}
-nc::vars(con)
+ncdump::vars(con)
 
 dims(con)
 
 ## perform a join of variable to dimension, keeping only the varname and id
-nc::vars(con) %>% dplyr::filter(name == "chlor_a") %>% transmute(varname = name, id) %>%  inner_join(con$vardim, "id") %>% inner_join(dims(con), c("dimids" = "id"))
+ncdump::vars(con) %>% dplyr::filter(name == "chlor_a") %>% transmute(varname = name, id) %>%  inner_join(con$vardim, "id") %>% inner_join(dims(con), c("dimids" = "id"))
 ```
 <!--
 ```{r,echo=FALSE,eval=FALSE}

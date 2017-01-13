@@ -1,4 +1,4 @@
 library(testthat)
 library(nc)
 
-test_check("nc")
+test_check("ncdump")

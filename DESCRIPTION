@@ -1,5 +1,5 @@
-Package: nc
-Title: Tidy NetCDF
+Package: ncdump
+Title: Tidy 'NetCDF' Dump
 Version: 0.0.2.9000
 Authors@R: person("Michael D.","Sumner", role = c("aut", "cre"), email =
     "mdsumner@gmail.com")
