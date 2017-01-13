@@ -8,7 +8,7 @@ rmarkdown::render("README.Rmd", "all")
 
 # Generate a template for a Code of Conduct
 #devtools::use_code_of_conduct()
-
+ 
 # Create the travis config file for continuous integration on Linux-OSX
 #devtools::use_travis()
 # move the newly created .travis.yml to the root directory and modify it
