@@ -18,3 +18,5 @@ Suggests: testthat,
     knitr,
     rmarkdown,
     covr
+URL: https://github.com/r-gris/ncdump
+BugReports: https://github.com/r-gris/ncdump/issues
