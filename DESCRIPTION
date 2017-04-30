@@ -3,8 +3,9 @@ Title: Extract Metadata from 'NetCDF' Files as Data Frames
 Version: 0.0.3
 Authors@R: person("Michael D.","Sumner", role = c("aut", "cre"), email =
     "mdsumner@gmail.com")
-Description: Tools for handling NetCDF metadata in data frames. A 'tidy' approach to NetCDF metadata, rather than trawling
-    raw printed header output or navigating nested lists of raw metadata. 
+Description: Tools for handling 'NetCDF' metadata in data frames. The metadata is provided
+    as related data frames, to avoid having to scan printed header output or to navigate nested lists of raw metadata. 'NetCDF' 
+    is 'Network Common Data Form' scientific data format provided by 'Unidata'. 
 Depends:
     R (>= 3.2.3)
 License: GPL-3

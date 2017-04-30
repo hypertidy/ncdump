@@ -7,4 +7,4 @@
 
 0 errors | 0 warnings | 1 note
 
-spelling, ...
+The note is a spell check about the word "metadata". 
