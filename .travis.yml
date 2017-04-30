@@ -4,6 +4,12 @@ language: r
 sudo: required
 cache: packages
 
+dist: trusty
+
+before_install:
+- sudo apt-get --yes --force-yes update -qq
+  - sudo apt-get install -y libudunits2-dev libnetcdf-dev
+
 
 after_success:
   - Rscript -e 'covr::codecov()'
