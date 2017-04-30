@@ -9,3 +9,5 @@
 ^cran-comments\.md$
 ^prepare_package.r$
 docs
+^CONDUCT\.md$
+^docs$

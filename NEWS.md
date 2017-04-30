@@ -1,4 +1,6 @@
-# dev
+# ncdump 0.0.3
 
-o ported 
+o initial release
+
+o ported from rancid
 

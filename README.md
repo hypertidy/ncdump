@@ -5,11 +5,9 @@
 NetCDF metadata in tables in R
 ==============================
 
-The `ncdump` package aims to simplify and systematize read-access to NetCDF in R.
+The `ncdump` package aims to simplify the way we can approach NetCDF in R.
 
-Currently the only functionality is to return the complete file metadata in tidy form, and some experimental function to return specific tables.
-
-The `ncdump` philosophy is to hide the underlying details of calls to the NetCDF API and provide wrappers to do those operations.
+Currently the only real functionality is to return the complete file metadata in tidy form. There is some experimental function to return specific entities, but in my experience the existing tools `ncdf4`, `raster`, `rgdal`, `RNetCDF` and `rhdf5` are sufficient for easily accessing almost everything. Where they fall down is in providing easy and complete information about what is available in the files, so that's where `ncdump::NetCDF` comes in.
 
 Create an object that has a complete description of the file so that we can easily see the available **variables** and **dimensions** and **attributes**, and perform queries that find the details we need in a form we can used, rather than just printed out on the screen.
 
@@ -67,7 +65,7 @@ for (i in seq_along(con)) {
 #> # A tibble: 1 × 10
 #>                                                                      filename
 #>                                                                         <chr>
-#> 1 C:/Users/mdsumner/Documents/R/win-library/3.3/ncdump/extdata/S2008001.L3m_D
+#> 1 /home/mdsumner/R/x86_64-pc-linux-gnu-library/3.4/ncdump/extdata/S2008001.L3
 #> # ... with 9 more variables: writable <lgl>, id <int>, safemode <lgl>,
 #> #   format <chr>, is_GMT <lgl>, ndims <dbl>, natts <dbl>,
 #> #   unlimdimid <dbl>, nvars <dbl>
@@ -129,9 +127,28 @@ for (i in seq_along(con)) {
 #> character(0)
 ```
 
+Rationale
+---------
+
+The main problems with the existing packages are that they are either too high-level or too low-level and it's this twilight zone in the middle where `ncdump` comes in, where the user needs to reach down a bit deeper to make things work. Using the wrappers around the raw API `ncdf4` and `RNetCDF` is very raw, and for the most part is analogous to the NetCDF API itself, though you don't have to compile the code. These packages aren't the same, and neither can read all kinds of NetCDF files. Both do support API features like NetCDF 4, server interfaces (OpenDAP and Thredds and the like), support for HDF, and parallel processing but it depends on how you build the underlying libaries. The details on this are not on the agenda here.
+
+The worker for most low-level NetCDF access is the command line utility `ncdump -h` - if not called with the `h`eader argument you can actually dump the data contents in various ways, including binary forms to other formats. The header is usually what you are expected to read to figure out how to program against the contents. It's not completely automatable, because it's so general it's unlikely that your generalized code will solve any particular practical task and there's no general libary for NetCDF that will give you practical outcomes for all types of data. It's a non-virtuous cycle.
+
+The `raster` package is excellent for NetCDF, but it only works "off-the-shelf" for regularly xy-gridded data in 2D, 3D or 4D variables. The mapping of dimensions to these variables is patchy, because the format is so general and many data variables have rectilinear or curvilinear coordinates, which are either ignored by raster or cause it to stop without reading anything. If you know what you want you can get it to work with any 2D or higher variable. Raster is a high-level domain-specific library, for GIS-y rasters, or grids that use an affine transform to define their coordinate system in xy.
+
+GDAL, available in `rgdal` has similar limitations to raster for the same affine/GIS reason, but also makes different choices when approaching higher dimensions. Essentially all higher dimensions get unrolled as extra bands for a GDAL data set. They are completely independently implemented, GDAL has an in-built NetCDF driver (also a GMT variant) and raster uses `ncdf4` directly. (Raster will use `rgdal` when it can for many formats, but you cannot actually override raster's used of ncdf4 without uninstalling that package. It's all quite complicated and poorly understood unfortunately, and it keeps changing).
+
+There is another package `rhdf5` which provides excellent modern facilities for HDF5 and NetCDF4, and notably this can read NetCDF files with compound types that no other package can do. This would be perfect if it could also read NetCDF "classic format", i.e. version 3.x prior to NetCDF 4.
+
+I use `ncdump` in conjunction with `angstroms` and various other projects. I can perform joins and select/filter tasks on the tables it returns, but it's not designed in any high-level consistent way, it just gives all the information it can get.
+
 Development
 -----------
 
 A format method for the object above could recreate the print out you see from ncdump itself.
 
 A future package may wrap the various NetCDF R packages to do the actual read, but each is useful in different ways. The main ones are `RNetCDF`, `ncdf4` and `rhdf5` (Bioconductor).
+
+This project was split out of the "R and NetCDF interface development" project. <https://github.com/mdsumner/rancid>
+
+Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
