@@ -80,7 +80,7 @@
     </div>
 
     
-    <p><code>NetCDF</code> scans all the metadata provided by the <code>ncdf4::nc_open</code> function, and organizes it by the entities in the file.</p>
+    <p>NetCDF scans all the metadata provided by the <a href='http://www.rdocumentation.org/packages/ncdf4/topics/nc_open'>ncdf4::nc_open</a> function, and organizes it by the entities in the file.</p>
     
 
     <pre class="usage"><span class='fu'>NetCDF</span>(<span class='no'>x</span>)</pre>
@@ -94,9 +94,20 @@
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A list of data frames with an unused S3 class 'NetCDF', see details for a description of the data frames. The 'attribute'
+data frame has class 'NetCDF_attributes', this is used with a custom print method to reduce the amount of output printed.</p>
+    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>A <code>NetCDF</code> file contains the following entities, and each gets a data frame int the resulting object:</p><table><tr><td>
+    <p>Users of 'NetCDF' files might be familiar with the command line tool 'ncdump
+-h' noting that the "header" argument is crucial for giving a compact summary
+of the contents of a file.  This package aims to provide that information
+as data, to be used for writing code to otherwise access and manipulate the
+contents of the files. This function doesn't do anything with the data, and
+it doesn't access any of the data.</p>
+<p>A NetCDF file contains the following entities, and each gets a data frame in the resulting object:</p><table><tr><td>
 <code>attribute</code> </td>
 </tr><tr><td> 'attributes' are general metadata about the file and its variables and dimensions</td>
 </tr><tr><td>
@@ -122,7 +133,13 @@
 <code>vardim</code> </td>
 </tr><tr><td> a link table between variables and their dimensions </td>
 </tr></table>
-    <p>Currently 'file' is expected to and treated as having only one row, but future versions may treat a collection of files as a single entity.</p>
+    <p>Currently 'file' is expected to and treated as having only one row, but future versions may treat a collection of files
+as a single entity.</p>
+<p>The 'ncdump -h' print summary above is analogous to the print method <a href='http://www.rdocumentation.org/packages/ncdf4/topics/print.ncdf4'>ncdf4::print.ncdf4</a> of the output of <a href='http://www.rdocumentation.org/packages/ncdf4/topics/nc_open'>ncdf4::nc_open</a>.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p><a href='http://www.rdocumentation.org/packages/ncdf4/topics/nc_open'>ncdf4::nc_open</a> which is what this function uses to obtain the information</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -238,7 +255,11 @@
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#value">Value</a></li>
+
       <li><a href="#details">Details</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
