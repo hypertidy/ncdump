@@ -10,7 +10,27 @@ NetCDF(x)
 \item{x}{path to NetCDF file}
 }
 \description{
-Information about a NetCDF file, in convenient form.
+\code{NetCDF} scans all the metadata provided by the \code{ncdf4::nc_open} function, and organizes it by the entities in the file.
+}
+\details{
+A \code{NetCDF} file contains the following entities, and each gets a data frame int the resulting object:
+\tabular{ll}{
+\code{attribute} \tab 'attributes' are general metadata about the file and its variables and dimensions\cr
+\code{dimension} \tab 'dimensions' are the axes defining the space of the data variables \cr
+\code{variable} \tab 'variables' are the actual data, the arrays containing data values \cr
+\code{group} \tab 'groups' are an internal abstraction to behave as a collection, analogous to a file. \cr
+}
+
+In addition to a data for each of the main entities above 'NetCDF' also creates:
+\tabular{ll}{
+\code{unlimdims} \tab the unlimited dimensions identify those which are not a constant lenghth (i.e. spread over files) \cr
+\code{dimvals} \tab a link table between dimensions and its coordinates \cr
+\code{file} \tab information about the file itself \cr
+\code{vardim} \tab a link table between variables and their dimensions \cr
+
+}
+
+Currently 'file' is expected to and treated as having only one row, but future versions may treat a collection of files as a single entity.
 }
 \examples{
 rnc <- NetCDF(system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package= "ncdump"))

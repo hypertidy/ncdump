@@ -4,7 +4,14 @@
 \name{ncdump}
 \alias{ncdump}
 \alias{ncdump-package}
-\title{ncdump.}
+\title{ncdump for NetCDF metadata.}
 \description{
-ncdump.
+Provides a useable data structure of NetCDF metadata
+NetCDF is Network Common Data Form \url{https://www.unidata.ucar.edu/software/netcdf/}.
+}
+\details{
+There is one main function:
+\tabular{ll}{
+\code{\link{NetCDF}} \tab produces a list of data frames containing metadata from a NetCDF file\cr
+}
 }

@@ -65,7 +65,7 @@ for (i in seq_along(con)) {
 #> # A tibble: 1 × 10
 #>                                                                      filename
 #>                                                                         <chr>
-#> 1 /home/mdsumner/R/x86_64-pc-linux-gnu-library/3.4/ncdump/extdata/S2008001.L3
+#> 1 /perm_storage/home/mdsumner/R/x86_64-pc-linux-gnu-library/3.4/ncdump/extdat
 #> # ... with 9 more variables: writable <lgl>, id <int>, safemode <lgl>,
 #> #   format <chr>, is_GMT <lgl>, ndims <dbl>, natts <dbl>,
 #> #   unlimdimid <dbl>, nvars <dbl>

@@ -7,4 +7,4 @@
 
 0 errors | 0 warnings | 1 note
 
-The note is a spell check about the word "metadata". 
+This is a new release, and there is a spell check about the word "metadata". 

@@ -80,7 +80,7 @@
     </div>
 
     
-    <p>Information about a NetCDF file, in convenient form.</p>
+    <p><code>NetCDF</code> scans all the metadata provided by the <code>ncdf4::nc_open</code> function, and organizes it by the entities in the file.</p>
     
 
     <pre class="usage"><span class='fu'>NetCDF</span>(<span class='no'>x</span>)</pre>
@@ -93,6 +93,36 @@
       <td><p>path to NetCDF file</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>A <code>NetCDF</code> file contains the following entities, and each gets a data frame int the resulting object:</p><table><tr><td>
+<code>attribute</code> </td>
+</tr><tr><td> 'attributes' are general metadata about the file and its variables and dimensions</td>
+</tr><tr><td>
+<code>dimension</code> </td>
+</tr><tr><td> 'dimensions' are the axes defining the space of the data variables </td>
+</tr><tr><td>
+<code>variable</code> </td>
+</tr><tr><td> 'variables' are the actual data, the arrays containing data values </td>
+</tr><tr><td>
+<code>group</code> </td>
+</tr><tr><td> 'groups' are an internal abstraction to behave as a collection, analogous to a file. </td>
+</tr></table>
+    <p>In addition to a data for each of the main entities above 'NetCDF' also creates:</p><table><tr><td>
+<code>unlimdims</code> </td>
+</tr><tr><td> the unlimited dimensions identify those which are not a constant lenghth (i.e. spread over files) </td>
+</tr><tr><td>
+<code>dimvals</code> </td>
+</tr><tr><td> a link table between dimensions and its coordinates </td>
+</tr><tr><td>
+<code>file</code> </td>
+</tr><tr><td> information about the file itself </td>
+</tr><tr><td>
+<code>vardim</code> </td>
+</tr><tr><td> a link table between variables and their dimensions </td>
+</tr></table>
+    <p>Currently 'file' is expected to and treated as having only one row, but future versions may treat a collection of files as a single entity.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -136,9 +166,9 @@
 #&gt; 
 #&gt; $file
 #&gt; # A tibble: 1 × 10
-#&gt;                                                                     filename
-#&gt;                                                                        &lt;chr&gt;
-#&gt; 1 /home/mdsumner/Git/ncdump/inst/extdata/S2008001.L3m_DAY_CHL_chlor_a_9km.nc
+#&gt;                                                                           filename
+#&gt;                                                                              &lt;chr&gt;
+#&gt; 1 /perm_storage/home/mdsumner/Git/ncdump/inst/extdata/S2008001.L3m_DAY_CHL_chlor_a
 #&gt; # ... with 9 more variables: writable &lt;lgl&gt;, id &lt;int&gt;, safemode &lt;lgl&gt;,
 #&gt; #   format &lt;chr&gt;, is_GMT &lt;lgl&gt;, ndims &lt;dbl&gt;, natts &lt;dbl&gt;, unlimdimid &lt;dbl&gt;,
 #&gt; #   nvars &lt;dbl&gt;
@@ -207,7 +237,9 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-            
+      
+      <li><a href="#details">Details</a></li>
+      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

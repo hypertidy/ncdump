@@ -4,10 +4,8 @@ Version: 0.0.3
 Authors@R: person("Michael D.","Sumner", role = c("aut", "cre"), email =
     "mdsumner@gmail.com")
 Description: Tools for handling 'NetCDF' metadata in data frames. The metadata is provided
-    as related data frames, to avoid having to scan printed header output or to navigate nested lists of raw metadata. 'NetCDF' 
-    is 'Network Common Data Form' scientific data format provided by 'Unidata'. 
-Depends:
-    R (>= 3.2.3)
+    as relations in tabular form, to avoid having to scan printed header output or to navigate 
+    nested lists of raw metadata. 
 License: GPL-3
 LazyData: true
 Imports:
@@ -20,3 +18,4 @@ Suggests: testthat,
     covr
 URL: https://github.com/r-gris/ncdump
 BugReports: https://github.com/r-gris/ncdump/issues
+Roxygen: list(markdown = TRUE)
