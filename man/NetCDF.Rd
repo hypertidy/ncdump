@@ -9,11 +9,15 @@ NetCDF(x)
 \arguments{
 \item{x}{path to NetCDF file}
 }
+\value{
+A list of data frames with an unused S3 class 'NetCDF', see details for a description of the data frames. The 'attribute'
+data frame has class 'NetCDF_attributes', this is used with a custom print method to reduce the amount of output printed.
+}
 \description{
-\code{NetCDF} scans all the metadata provided by the \code{ncdf4::nc_open} function, and organizes it by the entities in the file.
+\link{NetCDF} scans all the metadata provided by the \link[ncdf4:nc_open]{ncdf4::nc_open} function, and organizes it by the entities in the file.
 }
 \details{
-A \code{NetCDF} file contains the following entities, and each gets a data frame int the resulting object:
+A NetCDF file contains the following entities, and each gets a data frame int the resulting object:
 \tabular{ll}{
 \code{attribute} \tab 'attributes' are general metadata about the file and its variables and dimensions\cr
 \code{dimension} \tab 'dimensions' are the axes defining the space of the data variables \cr
@@ -35,4 +39,7 @@ Currently 'file' is expected to and treated as having only one row, but future v
 \examples{
 rnc <- NetCDF(system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package= "ncdump"))
 rnc
+}
+\seealso{
+\link[ncdf4:nc_open]{ncdf4::nc_open} which is what this function uses to obtain the information
 }
