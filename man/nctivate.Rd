@@ -4,6 +4,7 @@
 \alias{nctivate}
 \alias{nctivate.NetCDF}
 \alias{nctive}
+\alias{print.NetCDF}
 \title{Activate variable}
 \usage{
 nctivate(.data, what)
@@ -11,6 +12,8 @@ nctivate(.data, what)
 \method{nctivate}{NetCDF}(.data, what)
 
 nctive(x)
+
+\method{print}{NetCDF}(x)
 }
 \arguments{
 \item{.data}{}
@@ -19,4 +22,10 @@ nctive(x)
 }
 \description{
 Activate variable
+}
+\examples{
+f <- "/rdsi/PRIVATE/raad/data/eclipse.ncdc.noaa.gov/pub/OI-daily-v2/NetCDF/2017/AVHRR/avhrr-only-v2.20170502_preliminary.nc"
+x <- NetCDF(f)
+nctive(x)
+x <- nctivate(x, "sst") 
 }
