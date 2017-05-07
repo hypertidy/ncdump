@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • ncdump</title>
+<title>Activate variable — activate • ncdump</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -36,7 +36,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -74,88 +74,72 @@
       </header>
 
       <div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>
-        Reference
-        <small>version&nbsp;0.0.3.9001</small>
-      </h1>
+    <h1>Activate variable</h1>
     </div>
 
-    <div class="contents">
-      <table class="ref-index">
+    
+    <p>Stolen from tidygraph, we need this</p>
+    
 
-      <colgroup>
-        <col class="alias" />
-        <col class="title" />
-      </colgroup>
+    <pre class="usage"><span class='fu'>activate</span>(<span class='no'>.data</span>, <span class='no'>what</span>)
 
-      <tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="activate.html">activate</a></code> <code><a href="activate.html">nctive</a></code> <code><a href="activate.html">print</a></code> </p>
-          </td>
-          <td><p>Activate variable</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="dimension_values.html">dimension_values</a></code> <code><a href="dimension_values.html">dimension_valus.character</a></code> </p>
-          </td>
-          <td><p>Dimension values</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="dim_names.html">dim_names</a></code> </p>
-          </td>
-          <td><p>Dimension names</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="filtrate.html">filtrate</a></code> </p>
-          </td>
-          <td><p>Array subset by nse</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ncdump.html">ncdump</a></code> </p>
-          </td>
-          <td><p>ncdump for NetCDF metadata.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="NetCDF.html">NetCDF</a></code> </p>
-          </td>
-          <td><p>Information about a NetCDF file, in convenient form.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="variable_dimensions.html">variable_dimensions</a></code> </p>
-          </td>
-          <td><p>Dimensions of a variable</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="var_names.html">var_names</a></code> </p>
-          </td>
-          <td><p>Variable names</p></td>
-        </tr>
-      </tbody>
-      </table>
-    </div>
+<span class='co'># S3 method for NetCDF</span>
+<span class='fu'>activate</span>(<span class='no'>.data</span>, <span class='no'>what</span>)
+
+<span class='fu'>nctive</span>(<span class='no'>x</span>)
+
+<span class='co'># S3 method for NetCDF</span>
+<span class='fu'>print</span>(<span class='no'>x</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>.data</th>
+      <td><p>NetCDF object</p></td>
+    </tr>
+    <tr>
+      <th>what</th>
+      <td><p>name of a variable</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>NetCDF object</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p><code>activate</code> puts the named variable first
+<code>nctive</code> gets and sets the active variable</p>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>example</span>(<span class='no'>NetCDF</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: no help found for ‘NetCDF’</span></div><div class='input'><span class='fu'>activate</span>(<span class='no'>rnc</span>, <span class='st'>"palette"</span>)</div><div class='output co'>#&gt; [1] "Variable: palette"
+#&gt; [1] "(chlor_a)"
+#&gt; [1] "Dimension:"
+#&gt;            name length unlimited
+#&gt; 1           lat   2160     FALSE
+#&gt; 2           lon   4320     FALSE
+#&gt; 3           rgb      3     FALSE
+#&gt; 4 eightbitcolor    256     FALSE</div><div class='input'><span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='st'>"/rdsi/PRIVATE/raad/data/eclipse.ncdc.noaa.gov/pub/OI-daily-v2/NetCDF/2017/AVHRR/avhrr-only-v2.20170502_preliminary.nc"</span>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='NetCDF.html'>NetCDF</a></span>(<span class='no'>f</span>)
+<span class='fu'>nctive</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; [1] "sst"</div><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>activate</span>(<span class='no'>x</span>, <span class='st'>"sst"</span>)</div></pre>
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
     </ul>
+
   </div>
 </div>
 
