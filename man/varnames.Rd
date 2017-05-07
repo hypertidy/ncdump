@@ -19,6 +19,9 @@ varnames(x, ...)
 
 \item{...}{}
 }
+\value{
+names of variables available
+}
 \description{
 Variable names
 }

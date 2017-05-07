@@ -16,14 +16,23 @@ nctive(x)
 \method{print}{NetCDF}(x)
 }
 \arguments{
-\item{.data}{}
+\item{.data}{NetCDF object}
 
-\item{what}{}
+\item{what}{name of a variable}
+}
+\value{
+NetCDF object
 }
 \description{
 Stolen from tidygraph, we need this
 }
+\details{
+\code{activate} puts the named variable first
+\code{nctive} gets and sets the active variable
+}
 \examples{
+example(NetCDF)
+activate(rnc)
 f <- "/rdsi/PRIVATE/raad/data/eclipse.ncdc.noaa.gov/pub/OI-daily-v2/NetCDF/2017/AVHRR/avhrr-only-v2.20170502_preliminary.nc"
 x <- NetCDF(f)
 nctive(x)
