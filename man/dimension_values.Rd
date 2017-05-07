@@ -2,16 +2,26 @@
 % Please edit documentation in R/tidync.R
 \name{dimension_values}
 \alias{dimension_values}
+\alias{dimension_valus.character}
 \alias{dimension_values.NetCDF}
 \title{Dimension values}
 \usage{
 dimension_values(x)
+
+dimension_valus.character(x)
 
 \method{dimension_values}{NetCDF}(x)
 }
 \arguments{
 \item{x}{}
 }
+\value{
+data frame of dimensions and their values
+}
 \description{
 The dimension values are the coordinates, the positions along each axis.
+}
+\examples{
+example(NetCDF)
+dimension_values(rnc)
 }

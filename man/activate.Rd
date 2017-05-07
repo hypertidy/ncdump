@@ -32,7 +32,7 @@ Stolen from tidygraph, we need this
 }
 \examples{
 example(NetCDF)
-activate(rnc)
+activate(rnc, "palette")
 f <- "/rdsi/PRIVATE/raad/data/eclipse.ncdc.noaa.gov/pub/OI-daily-v2/NetCDF/2017/AVHRR/avhrr-only-v2.20170502_preliminary.nc"
 x <- NetCDF(f)
 nctive(x)

@@ -11,6 +11,9 @@ filtrate(x, ...)
 
 \item{...}{}
 }
+\value{
+data frame
+}
 \description{
 NSE arguments must be named as per the dimensions in the variable. This is a restrictive variant of \code{dplyr::filter},
 with a syntax more like \code{dplyr::mutate}. This ensures that each element is named, so we know which dimension to
