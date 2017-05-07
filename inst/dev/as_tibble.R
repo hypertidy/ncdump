@@ -86,6 +86,9 @@ var_as_tibble <- function(x, varname) {
 
 #' @importFrom tibble tibble as_tibble
 #' @importFrom dplyr %>% filter
+#' 
+#' @examples 
+#' ff <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package= "ncdump")
 dimvals_as_tibble <- function(x, varname) {
   nc <- ncdump::NetCDF(x)
   yes <- ok_var(nc, varname)
@@ -93,7 +96,7 @@ dimvals_as_tibble <- function(x, varname) {
   ## this dimorder is crucial, should be specified in the dump
   dims <- nc$variable %>% dplyr::filter(name == varname) %>% 
     dplyr::select(id) %>% inner_join(nc$vardim %>% mutate(dim_order = row_number())) %>%  arrange(dim_order)
-  all_dimvals <- dims %>% transmute(id = dimids, dim_order) %>% inner_join(nc$dimvals %>% mutate(row_num = row_number()), "id") 
+  all_dimvals <- dims %>% transmute(id = dimids, dim_order) %>% inner_join(nc$dimension_valuess %>% mutate(row_num = row_number()), "id") 
   ## we must filter on create_dimvar
   len_dims <- dims %>% transmute(id = dimids, dim_order) %>% inner_join(nc$dimension %>% dplyr::filter(create_dimvar)) #%>% arrange(desc(id))
 print(len_dims)

@@ -11,7 +11,7 @@ names1 <- names(roms1)
 names2 <- names(roms2)
 
 expect_that(names1, equals(names2))
-## dimension, dimvals, different since ocean_time is 25 in 1 but 24 in 2
+## dimension, dimension_values, different since ocean_time is 25 in 1 but 24 in 2
 ## file different since filename changes
 ## unlimdims, groups, variable, vardim, and attribute are all identical
 
