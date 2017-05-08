@@ -13,7 +13,8 @@ Imports:
     forcats,
     ncdf4, 
     purrr,
-    rlang
+    rlang, 
+    tibble
 RoxygenNote: 6.0.1
 Suggests: testthat,
     knitr,
