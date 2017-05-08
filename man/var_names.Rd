@@ -15,9 +15,9 @@ var_names(x, ...)
 \method{var_names}{NetCDF}(x, ...)
 }
 \arguments{
-\item{x}{}
+\item{x}{NetCDF object}
 
-\item{...}{}
+\item{...}{currently ignored}
 }
 \value{
 names of variables available

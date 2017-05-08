@@ -12,6 +12,9 @@ variable_dimensions(x)
 
 variable_dimensions(x)
 }
+\arguments{
+\item{x}{NetCDF object}
+}
 \description{
 Dimensions of a variable
 }

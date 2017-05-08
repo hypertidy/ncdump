@@ -15,9 +15,9 @@ dim_names(x, ...)
 \method{dim_names}{NetCDF}(x, ...)
 }
 \arguments{
-\item{x}{}
+\item{x}{NetCDF object}
 
-\item{...}{}
+\item{...}{ignored}
 }
 \value{
 names of available dimensions

@@ -13,7 +13,7 @@ dimension_valus.character(x)
 \method{dimension_values}{NetCDF}(x)
 }
 \arguments{
-\item{x}{}
+\item{x}{NetCDF object}
 }
 \value{
 data frame of dimensions and their values

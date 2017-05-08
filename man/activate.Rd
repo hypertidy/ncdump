@@ -4,7 +4,6 @@
 \alias{activate}
 \alias{activate.NetCDF}
 \alias{nctive}
-\alias{print.NetCDF}
 \title{Activate variable}
 \usage{
 activate(.data, what)
@@ -12,13 +11,13 @@ activate(.data, what)
 \method{activate}{NetCDF}(.data, what)
 
 nctive(x)
-
-\method{print}{NetCDF}(x)
 }
 \arguments{
 \item{.data}{NetCDF object}
 
 \item{what}{name of a variable}
+
+\item{x}{NetCDF object}
 }
 \value{
 NetCDF object
@@ -33,8 +32,4 @@ Stolen from tidygraph, we need this
 \examples{
 example(NetCDF)
 activate(rnc, "palette")
-f <- "/rdsi/PRIVATE/raad/data/eclipse.ncdc.noaa.gov/pub/OI-daily-v2/NetCDF/2017/AVHRR/avhrr-only-v2.20170502_preliminary.nc"
-x <- NetCDF(f)
-nctive(x)
-x <- activate(x, "sst") 
 }
