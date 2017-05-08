@@ -9,7 +9,7 @@ Description: Tools for handling 'NetCDF' metadata in data frames. The metadata i
 License: GPL-3
 LazyData: true
 Imports:
-    dplyr,
+    dplyr (> 0.5.0),
     forcats,
     ncdf4, 
     purrr,
@@ -20,6 +20,7 @@ Suggests: testthat,
     knitr,
     rmarkdown,
     covr
+Remotes: tidyverse/dplyr
 URL: https://github.com/r-gris/ncdump
 BugReports: https://github.com/r-gris/ncdump/issues
 Roxygen: list(markdown = TRUE)
