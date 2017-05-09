@@ -1,11 +1,30 @@
 sample_file <- function(x, ...) {
   dplyr::sample_n(x, 1L) %>% dplyr::select(date, fullname)
 }
+
+as_tib_slab <- function(trans, slab, activ) {
+  tib <- list()
+  tib[[activ]] <- as.vector(slab)
+  tib <- as_tibble(tib)
+  prod_dims <- 1
+  total_prod <- prod(dim(slab))
+  
+  for (i in seq_along(trans)) {
+    nm <- names(trans)[i]
+    nr <- nrow(trans[[i]])
+    tib[[nm]] <- rep(trans[[nm]][[nm]], each = prod_dims, length.out = total_prod)
+    prod_dims <- prod_dims * nr
+  }
+  tib
+}
+
+
 library(ncdump)
 library(tibble)
 library(dplyr, warn.conflicts = FALSE)
 library(maps)
 library(raadtools)
+library(ggplot2)
 set.seed(1)
 
 files <- lapply(list(
@@ -167,6 +186,7 @@ map("world2", add = TRUE)
 
 
 
+
 ## ------------------------------------------------------------------------------
 ## ------------------------------------------------------------------------------
 ## ------------------------------------------------------------------------------
@@ -208,6 +228,9 @@ slab <- ncdf4::ncvar_get(con, nctive(x),
 ## (this will be wrapped up in an easy function but it's important to keep things general)
 image(trans$lon$lon, trans$lat$lat, slab, col = viridis::viridis(100))
 map("world2", add = TRUE)
+
+
+ggplot(as_tib_slab(trans, slab, "silicate"), aes(lon, lat, fill = silicate)) + geom_raster()
 
 ## ------------------------------------------------------------------------------
 ## ------------------------------------------------------------------------------
@@ -288,6 +311,9 @@ for (i in seq(nrow(trans$time))) {
 image(trans$lon$lon, rev(trans$lat$lat), slab[,ncol(slab):1,i], col = viridis::viridis(100), asp = 1/cos(-40 * pi/180))
 map("world2", add = TRUE)
 }
+
+
+ggplot(as_tib_slab(trans, slab, "uwnd"), aes(lon, lat, fill = uwnd)) + geom_raster() + facet_wrap(~time)
 
 
 ## ------------------------------------------------------------------------------

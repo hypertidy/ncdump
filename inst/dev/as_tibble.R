@@ -1,3 +1,18 @@
+as_tib_slab <- function(trans, slab, activ) {
+  tib <- list()
+  tib[[activ]] <- as.vector(slab)
+  tib <- as_tibble(tib)
+  prod_dims <- 1
+  total_prod <- prod(dim(slab))
+  
+  for (i in seq_along(trans)) {
+    nm <- names(trans)[i]
+    nr <- nrow(trans[[i]])
+    tib[[nm]] <- rep(trans[[nm]][[nm]], each = prod_dims, length.out = total_prod)
+    prod_dims <- prod_dims * nr
+  }
+  tib
+}
 # # A tibble: 3 × 7
 # id  name   len unlim group_index group_id create_dimvar
 # <int> <chr> <int> <lgl>       <int>    <int>         <lgl>
@@ -129,3 +144,4 @@ hyper_tibble <- function(x, ...) {
   
   tibble::as_tibble(setNames(list(as.vector(slab)), nctive(x)))
 }
+
