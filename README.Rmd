@@ -25,7 +25,14 @@ library(ncdump)
 
 The `ncdump` package aims to simplify the way we can approach NetCDF in R.
 
-Currently the only real functionality is to return the complete file metadata in tidy form. There is some experimental function to return specific entities, but in my experience the existing tools `ncdf4`, `raster`, `rgdal`, `RNetCDF` and `rhdf5` are sufficient for easily accessing almost everything. Where they fall down is in providing easy and complete information about what is available in the files, so that's where `ncdump::NetCDF` comes in. 
+In development is the ability to use dplyr filter-like expressions on the virtual dimension
+names to get a "transform object", a table for each of the axis position values. This is used
+to  build "hyperslab" (array) queries for the NetCDF API, and then these two outputs can be combined in a table for simple analysis or visualization. There are some examples here: 
+
+http://rpubs.com/cyclemumner/274516
+
+
+Currently the only stable functionality is to return the complete file metadata in tidy form. There is some experimental function to return specific entities, but in my experience the existing tools `ncdf4`, `raster`, `rgdal`, `RNetCDF` and `rhdf5` are sufficient for easily accessing almost everything. Where they fall down is in providing easy and complete information about what is available in the files, so that's where `ncdump::NetCDF` comes in. 
 
 Create an object that has a complete description of the file so that we can easily see the available **variables** and **dimensions** and **attributes**, and perform queries that find the details we need in a form we can used, rather than just printed out on the screen. 
 

@@ -1,5 +1,7 @@
 # dev
 
+* initial versions of the tidync API
+
 * removed all old data_frame uses
 
 breaking name changes

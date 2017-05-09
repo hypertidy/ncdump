@@ -1,13 +1,17 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Travis-CI Build Status](https://travis-ci.org/r-gris/ncdump.svg?branch=master)](https://travis-ci.org/r-gris/ncdump) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/r-gris/ncdump?branch=master&svg=true)](https://ci.appveyor.com/project/r-gris/ncdump) [![Coverage Status](https://img.shields.io/codecov/c/github/r-gris/ncdump/master.svg)](https://codecov.io/github/r-gris/ncdump?branch=master)
+[![Travis-CI Build Status](https://travis-ci.org/r-gris/ncdump.svg?branch=master)](https://travis-ci.org/r-gris/ncdump) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/r-gris/ncdump?branch=master&svg=true)](https://ci.appveyor.com/project/r-gris/ncdump) [![Coverage Status](https://img.shields.io/codecov/c/github/r-gris/ncdump/master.svg)](https://codecov.io/github/r-gris/ncdump?branch=master) [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/ncdump)](http://www.r-pkg.org/pkg/ncdump)
 
 NetCDF metadata in tables in R
 ==============================
 
 The `ncdump` package aims to simplify the way we can approach NetCDF in R.
 
-Currently the only real functionality is to return the complete file metadata in tidy form. There is some experimental function to return specific entities, but in my experience the existing tools `ncdf4`, `raster`, `rgdal`, `RNetCDF` and `rhdf5` are sufficient for easily accessing almost everything. Where they fall down is in providing easy and complete information about what is available in the files, so that's where `ncdump::NetCDF` comes in.
+In development is the ability to use dplyr filter-like expressions on the virtual dimension names to get a "transform object", a table for each of the axis position values. This is used to build "hyperslab" (array) queries for the NetCDF API, and then these two outputs can be combined in a table for simple analysis or visualization. There are some examples here:
+
+<http://rpubs.com/cyclemumner/274516>
+
+Currently the only stable functionality is to return the complete file metadata in tidy form. There is some experimental function to return specific entities, but in my experience the existing tools `ncdf4`, `raster`, `rgdal`, `RNetCDF` and `rhdf5` are sufficient for easily accessing almost everything. Where they fall down is in providing easy and complete information about what is available in the files, so that's where `ncdump::NetCDF` comes in.
 
 Create an object that has a complete description of the file so that we can easily see the available **variables** and **dimensions** and **attributes**, and perform queries that find the details we need in a form we can used, rather than just printed out on the screen.
 
@@ -29,64 +33,66 @@ for (i in seq_along(con)) {
   print(con[[i]])
 }
 #> [1] "dimension"
-#> # A tibble: 4 × 7
+#> # A tibble: 4 × 9
 #>            name   len unlim group_index group_id    id create_dimvar
 #>           <chr> <int> <lgl>       <int>    <int> <int>         <lgl>
 #> 1           lat  2160 FALSE           1    65536     0          TRUE
 #> 2           lon  4320 FALSE           1    65536     1          TRUE
 #> 3           rgb     3 FALSE           1    65536     2         FALSE
 #> 4 eightbitcolor   256 FALSE           1    65536     3         FALSE
+#> # ... with 2 more variables: .dimension_ <int>, .group_ <int>
 #> [1] "unlimdims"
 #> NULL
-#> [1] "dimvals"
-#> # A tibble: 6,739 × 2
-#>       id     vals
-#>    <int>    <dbl>
-#>  1     0 89.95834
-#>  2     0 89.87500
-#>  3     0 89.79167
-#>  4     0 89.70834
-#>  5     0 89.62500
-#>  6     0 89.54167
-#>  7     0 89.45834
-#>  8     0 89.37500
-#>  9     0 89.29167
-#> 10     0 89.20834
+#> [1] "dimension_values"
+#> # A tibble: 6,739 × 3
+#>       id     vals .dimension_
+#>    <int>    <dbl>       <int>
+#>  1     0 89.95834           0
+#>  2     0 89.87500           0
+#>  3     0 89.79167           0
+#>  4     0 89.70834           0
+#>  5     0 89.62500           0
+#>  6     0 89.54167           0
+#>  7     0 89.45834           0
+#>  8     0 89.37500           0
+#>  9     0 89.29167           0
+#> 10     0 89.20834           0
 #> # ... with 6,729 more rows
-#> [1] "groups"
-#> # A tibble: 3 × 6
+#> [1] "group"
+#> # A tibble: 3 × 7
 #>      id               name ndims nvars natts
 #>   <int>              <chr> <int> <int> <int>
 #> 1 65536                        4     4    65
 #> 2 65537 processing_control     0     0     4
 #> 3 65538   input_parameters     0     0    21
-#> # ... with 1 more variables: fqgn <chr>
+#> # ... with 2 more variables: fqgn <chr>, .group_ <int>
 #> [1] "file"
-#> # A tibble: 1 × 10
+#> # A tibble: 1 × 11
 #>                                                                      filename
 #>                                                                         <chr>
 #> 1 /perm_storage/home/mdsumner/R/x86_64-pc-linux-gnu-library/3.4/ncdump/extdat
-#> # ... with 9 more variables: writable <lgl>, id <int>, safemode <lgl>,
+#> # ... with 10 more variables: writable <lgl>, id <int>, safemode <lgl>,
 #> #   format <chr>, is_GMT <lgl>, ndims <dbl>, natts <dbl>,
-#> #   unlimdimid <dbl>, nvars <dbl>
+#> #   unlimdimid <dbl>, nvars <dbl>, .file_ <int>
 #> [1] "variable"
-#> # A tibble: 2 × 18
+#> # A tibble: 2 × 19
 #>      name ndims natts          prec   units
 #>     <chr> <int> <int>         <chr>   <chr>
 #> 1 chlor_a     2    12         float mg m^-3
 #> 2 palette     2     0 unsigned byte        
-#> # ... with 13 more variables: longname <chr>, group_index <int>,
+#> # ... with 14 more variables: longname <chr>, group_index <int>,
 #> #   storage <int>, shuffle <int>, compression <int>, unlim <lgl>,
 #> #   make_missing_value <lgl>, missval <dbl>, hasAddOffset <lgl>,
-#> #   addOffset <dbl>, hasScaleFact <lgl>, scaleFact <dbl>, id <dbl>
+#> #   addOffset <dbl>, hasScaleFact <lgl>, scaleFact <dbl>,
+#> #   .variable_ <dbl>, .group_ <int>
 #> [1] "vardim"
 #> # A tibble: 4 × 2
-#>      id dimids
-#>   <dbl>  <int>
-#> 1     0      1
-#> 2     0      0
-#> 3     3      3
-#> 4     3      2
+#>   .variable_ .dimension_
+#>        <dbl>       <int>
+#> 1          0           1
+#> 2          0           0
+#> 3          3           3
+#> 4          3           2
 #> [1] "attribute"
 #> [1] "NetCDF attributes:"
 #> [1] "Global"
