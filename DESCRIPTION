@@ -20,7 +20,7 @@ Suggests: testthat,
     knitr,
     rmarkdown,
     covr
-Remotes: tidyverse/dplyr
+Remotes: tidyverse/dplyr, tidyverse/rlang
 URL: https://github.com/r-gris/ncdump
 BugReports: https://github.com/r-gris/ncdump/issues
 Roxygen: list(markdown = TRUE)
