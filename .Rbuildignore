@@ -12,3 +12,5 @@ docs
 ^CONDUCT\.md$
 ^docs$
 ^rnc.rds$
+^inst/dev$
+^inst/wdev$
