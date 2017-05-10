@@ -58,7 +58,7 @@ hslab <- bind_rows(lapply(trans, function(x) tibble(name = x$name[1], start = mi
 
 ## open the file and pull out that slab 
 con <- ncdf4::nc_open(x$file$filename[1])
-slab <- ncdf4::ncvar_get(con, nctive(x), 
+slab <- ncdf4::ncvar_get(con, active(x), 
                          start = hslab$start, 
                          count = hslab$count)
 
@@ -87,7 +87,7 @@ hslab <- bind_rows(lapply(trans, function(x) tibble(name = x$name[1], start = mi
 
 ## open the file and pull out that slab 
 con <- ncdf4::nc_open(x$file$filename[1])
-slab <- ncdf4::ncvar_get(con, nctive(x), 
+slab <- ncdf4::ncvar_get(con, active(x), 
                          start = hslab$start, 
                          count = hslab$count)
 
@@ -107,7 +107,7 @@ hslab <- bind_rows(lapply(trans, function(x) tibble(name = x$name[1], start = mi
 
 ## open the file and pull out that slab 
 con <- ncdf4::nc_open(x$file$filename[1])
-slab <- ncdf4::ncvar_get(con, nctive(x), 
+slab <- ncdf4::ncvar_get(con, active(x), 
                          start = hslab$start, 
                          count = hslab$count)
 
@@ -133,7 +133,7 @@ hslab <- bind_rows(lapply(trans, function(x) tibble(name = x$name[1], start = mi
 
 ## open the file and pull out that slab 
 con <- ncdf4::nc_open(x$file$filename[1])
-slab <- ncdf4::ncvar_get(con, nctive(x), 
+slab <- ncdf4::ncvar_get(con, active(x), 
                          start = hslab$start, 
                          count = hslab$count)
 
@@ -166,13 +166,13 @@ hslab <- bind_rows(lapply(trans, function(x) tibble(name = x$name[1], start = mi
 
 ## open the file and pull out that slab 
 con <- ncdf4::nc_open(x$file$filename[1])
-uslab <- ncdf4::ncvar_get(con, nctive(x), 
+uslab <- ncdf4::ncvar_get(con, active(x), 
                          start = hslab$start, 
                          count = hslab$count)
 
 ## get the other slab while we are at it
 x <- activate(x, "v")
-vslab <- ncdf4::ncvar_get(con, nctive(x), 
+vslab <- ncdf4::ncvar_get(con, active(x), 
                          start = hslab$start, 
                          count = hslab$count)
 
@@ -221,7 +221,7 @@ hslab <- bind_rows(lapply(trans, function(x) tibble(name = x$name[1], start = mi
 
 ## open the file and pull out that slab 
 con <- ncdf4::nc_open(x$file$filename[1])
-slab <- ncdf4::ncvar_get(con, nctive(x), 
+slab <- ncdf4::ncvar_get(con, active(x), 
                          start = hslab$start, 
                          count = hslab$count)
 
@@ -249,7 +249,7 @@ hslab <- bind_rows(lapply(trans, function(x) tibble(name = x$name[1], start = mi
 
 ## open the file and pull out that slab 
 con <- ncdf4::nc_open(x$file$filename[1])
-slab <- ncdf4::ncvar_get(con, nctive(x), 
+slab <- ncdf4::ncvar_get(con, active(x), 
                          start = hslab$start, 
                          count = hslab$count)
 
@@ -276,7 +276,7 @@ hslab <- bind_rows(lapply(trans, function(x) tibble(name = x$name[1], start = mi
 
 ## open the file and pull out that slab 
 con <- ncdf4::nc_open(x$file$filename[1])
-slab <- ncdf4::ncvar_get(con, nctive(x), 
+slab <- ncdf4::ncvar_get(con, active(x), 
                          start = hslab$start, 
                          count = hslab$count)
 
@@ -303,7 +303,7 @@ hslab <- bind_rows(lapply(trans, function(x) tibble(name = x$name[1], start = mi
 
 ## open the file and pull out that slab 
 con <- ncdf4::nc_open(x$file$filename[1])
-slab <- ncdf4::ncvar_get(con, nctive(x), 
+slab <- ncdf4::ncvar_get(con, active(x), 
                          start = hslab$start, 
                          count = hslab$count)
 
@@ -333,7 +333,7 @@ trans <- x %>% filtrate(eta_rho = eta_rho < 100, xi_rho = between(xi_rho, 500, 6
 
 ## open the file and pull out that slab 
 con <- ncdf4::nc_open(x$file$filename[1])
-slab <- ncdf4::ncvar_get(con, nctive(x), 
+slab <- ncdf4::ncvar_get(con, active(x), 
                          start = hslab$start, 
                          count = hslab$count)
 

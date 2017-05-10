@@ -138,10 +138,10 @@ hyper_tibble <- function(x, ...) {
   trans <- filtrate(x, ...)
   hslab <- bind_rows(lapply(trans, function(x) tibble(name = x$name[1], start = min(x$step), count = length(x$step))))
   con <- ncdf4::nc_open(x$file$filename[1])
-  slab <- ncdf4::ncvar_get(con, nctive(x), 
+  slab <- ncdf4::ncvar_get(con, active(x), 
                            start = trans$start, 
                            count = trans$count)
   
-  tibble::as_tibble(setNames(list(as.vector(slab)), nctive(x)))
+  tibble::as_tibble(setNames(list(as.vector(slab)), active(x)))
 }
 
