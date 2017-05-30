@@ -2,13 +2,13 @@
 % Please edit documentation in R/tidync.R
 \name{dimension_values}
 \alias{dimension_values}
-\alias{dimension_valus.character}
+\alias{dimension_values.character}
 \alias{dimension_values.NetCDF}
 \title{Dimension values}
 \usage{
 dimension_values(x)
 
-dimension_valus.character(x)
+\method{dimension_values}{character}(x)
 
 \method{dimension_values}{NetCDF}(x)
 }

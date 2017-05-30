@@ -6,6 +6,10 @@
 \alias{hyper_index.tbl_df}
 \alias{hyper_index}
 \alias{hyper_index.NetCDF}
+\alias{hyper_index}
+\alias{hyper_index.character}
+\alias{hyper_index}
+\alias{hyper_index.hyperfilter}
 \title{hyper slab index}
 \usage{
 hyper_index(x, ...)
@@ -13,6 +17,10 @@ hyper_index(x, ...)
 \method{hyper_index}{tbl_df}(x, ...)
 
 \method{hyper_index}{NetCDF}(x, ...)
+
+\method{hyper_index}{character}(x, varname, ...)
+
+\method{hyper_index}{hyperfilter}(x, ...)
 }
 \arguments{
 \item{...}{expressions to \code{filtrate}}
