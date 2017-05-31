@@ -16,7 +16,22 @@
 \alias{active<-.NetCDF}
 \alias{activate}
 \alias{active<-.hyperfilter}
-\title{Activate}
+\title{#' @name hyper_filter
+#' @export
+hyper_filter_Spatial <- function(x, y, ...) {
+warning("assuming first two dimensions are longitude-latitude ...")
+dim_tabs <- hyper_filter(x)
+xy_names <- names(dim_tabs)\link{1:2}
+xy_grid <- as.matrix(expand.grid(x = dim_tabs[[1]][[xy_names[1]]],
+y = dim_tabs[[1]][[xy_names[1]]]))
+over(y, SpatialPoints(xy_grid, proj4string = crs(y)))
+}
+Activate
+
+[[1]: R:[1
+[xy_names[1]: R:xy_names[1
+[[1]: R:[1
+[xy_names[1]: R:xy_names[1}
 \usage{
 activate(.data, what)
 

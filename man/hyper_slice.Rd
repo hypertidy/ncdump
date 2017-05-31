@@ -3,7 +3,9 @@
 \name{hyper_slice}
 \alias{hyper_slice}
 \alias{hyper_slice}
-\alias{hyper_slice.hyperslab}
+\alias{hyper_slice.hyperindex}
+\alias{hyper_slice}
+\alias{hyper_slice.hyperfilter}
 \alias{hyper_slice}
 \alias{hyper_slice.NetCDF}
 \alias{hyper_slice}
@@ -12,14 +14,16 @@
 \usage{
 hyper_slice(x, ...)
 
-\method{hyper_slice}{hyperslab}(x, ...)
+\method{hyper_slice}{hyperindex}(x, ...)
+
+\method{hyper_slice}{hyperfilter}(x, ...)
 
 \method{hyper_slice}{NetCDF}(x, ...)
 
 \method{hyper_slice}{character}(x, ...)
 }
 \arguments{
-\item{x}{a hyper slab}
+\item{x}{a hyperindex-able thing}
 
 \item{...}{ignored}
 }
