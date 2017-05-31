@@ -100,7 +100,7 @@ NetCDF <- function(x) {
   ## leave the fqgn2Rindex for now
   file <- dplyr::as_data_frame(nc[!names(nc) %in% c("dim", "var", "groups", "fqgn2Rindex")])
   ## when we drop these, how do we track keeping them elsewhere?
-  var <- do.call(dplyr::bind_rows, lapply(nc$var, function(x) dplyr::as_data_frame(x[!names(x) %in% c("chunksizes", "id", "dims", "dim", "varsize", "size", "dimids")])))
+  var <- do.call(dplyr::bind_rows, lapply(nc$var, function(x) dplyr::as_data_frame(x[!names(x) %in% c("chunksizes", "id", "dims", "dim", "missval", "varsize", "size", "dimids")])))
   var$id <- sapply(nc$var, function(x) x$id$id)
   vardim <- do.call(bind_rows, lapply(nc$var, function(x) data_frame(id = rep(x$id$id, length(x$dimids)), dimids = x$dimids)))
   ## read attributes, should be made optional (?) to avoid long read time
