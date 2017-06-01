@@ -96,20 +96,20 @@ ncatts.character <- function(x) {
 #' rnc <- NetCDF(system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package= "ncdump"))
 NetCDF <- function(x) {
   nc <- ncdf4::nc_open(x)
-  dimension <- do.call(dplyr::bind_rows, lapply(nc$dim, function(x) tibble::as_tibble(x[!names(x) %in% c("dimvarid", "vals", "units", "calendar")])))
+  dimension <- dplyr::bind_rows(lapply(nc$dim, function(x) tibble::as_tibble(x[!names(x) %in% c("dimvarid", "vals", "units", "calendar")])))
   unlimdims <- NULL
-  if (any(dimension$unlim)) unlimdims <- do.call(dplyr::bind_rows, lapply( nc$dim[dimension$unlim], function(x) dplyr::tibble(x[names(x) %in% c("id", "units", "calendar")])))
+  if (any(dimension$unlim)) unlimdims <- dplyr::bind_rows(lapply( nc$dim[dimension$unlim], function(x) dplyr::tibble(x[names(x) %in% c("id", "units", "calendar")])))
   ## do we care that some dims are degenerate 1D?
   ##lapply(nc$dim, function(x) dim(x$vals))
-  dimension_values <- do.call(dplyr::bind_rows, lapply(nc$dim, function(x) dplyr::tibble(id = rep(x$id, length(x$vals)), vals = x$vals)))
+  dimension_values <- dplyr::bind_rows(lapply(nc$dim, function(x) dplyr::tibble(id = rep(x$id, length(x$vals)), vals = x$vals)))
   ## the dimids are in the dims table above
-  group <- do.call(dplyr::bind_rows, lapply(nc$groups, function(x) tibble::as_tibble(x[!names(x) %in% "dimid"]))) 
+  group <- dplyr::bind_rows(lapply(nc$groups, function(x) tibble::as_tibble(x[!names(x) %in% "dimid"]))) 
   ## leave the fqgn2Rindex for now
   file <- tibble::as_tibble(nc[!names(nc) %in% c("dim", "var", "groups", "fqgn2Rindex")])
   ## when we drop these, how do we track keeping them elsewhere?
-  variable <- do.call(dplyr::bind_rows, lapply(nc$var, function(x) tibble::as_tibble(x[!names(x) %in% c("chunksizes", "id", "dims", "dim", "missval", "varsize", "size", "dimids")])))
+  variable <- dplyr::bind_rows(lapply(nc$var, function(x) tibble::as_tibble(x[!names(x) %in% c("chunksizes", "id", "dims", "dim", "missval", "varsize", "size", "dimids")])))
   variable$.variable_ <- sapply(nc$var, function(x) x$id$id)
-  variable_link_dimension <- do.call(bind_rows, lapply(nc$var, function(x) tibble(.variable_ = rep(x$id$id, length(x$dimids)), .dimension_ = x$dimids)))
+  variable_link_dimension <- dplyr::bind_rows(lapply(nc$var, function(x) tibble(.variable_ = rep(x$id$id, length(x$dimids)), .dimension_ = x$dimids)))
   ## read attributes, should be made optional (?) to avoid long read time
   atts <- ncatts(x)
   class(atts) <- c("NetCDF_attributes", "list")
