@@ -129,9 +129,7 @@ NetCDF <- function(x) {
             dimension_values = dimension_values, group = group, file = file, variable = variable, 
             vardim = variable_link_dimension, attribute = atts)
   class(x) <- c("NetCDF", "list")
-  ## TODO logic to determine what to make the active variable
-  
-  activate(x, x$variable$name[1])
+  x
 }
 #' @importFrom utils head
 longlistformat <- function(x, n = 8) {

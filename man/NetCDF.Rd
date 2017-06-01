@@ -48,7 +48,6 @@ The 'ncdump -h' print summary above is analogous to the print method \link[ncdf4
 }
 \examples{
 rnc <- NetCDF(system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package= "ncdump"))
-rnc
 }
 \seealso{
 \link[ncdf4:nc_open]{ncdf4::nc_open} which is what this function uses to obtain the information
