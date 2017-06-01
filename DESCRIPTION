@@ -10,7 +10,9 @@ License: GPL-3
 LazyData: true
 Imports:
     dplyr,
-    ncdf4
+    ncdf4, 
+    rlang, 
+    tibble
 RoxygenNote: 6.0.1
 Suggests: testthat,
     knitr,

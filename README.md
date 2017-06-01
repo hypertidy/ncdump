@@ -31,69 +31,70 @@ for (i in seq_along(con)) {
   print(con[[i]])
 }
 #> [1] "dimension"
-#> # A tibble: 4 × 7
+#> # A tibble: 4 x 9
 #>            name   len unlim group_index group_id    id create_dimvar
 #>           <chr> <int> <lgl>       <int>    <int> <int>         <lgl>
 #> 1           lat  2160 FALSE           1    65536     0          TRUE
 #> 2           lon  4320 FALSE           1    65536     1          TRUE
 #> 3           rgb     3 FALSE           1    65536     2         FALSE
 #> 4 eightbitcolor   256 FALSE           1    65536     3         FALSE
+#> # ... with 2 more variables: .dimension_ <int>, .group_ <int>
 #> [1] "unlimdims"
 #> NULL
-#> [1] "dimvals"
-#> # A tibble: 6,739 × 2
-#>       id     vals
-#>    <int>    <dbl>
-#>  1     0 89.95834
-#>  2     0 89.87500
-#>  3     0 89.79167
-#>  4     0 89.70834
-#>  5     0 89.62500
-#>  6     0 89.54167
-#>  7     0 89.45834
-#>  8     0 89.37500
-#>  9     0 89.29167
-#> 10     0 89.20834
+#> [1] "dimension_values"
+#> # A tibble: 6,739 x 3
+#>       id     vals .dimension_
+#>    <int>    <dbl>       <int>
+#>  1     0 89.95834           0
+#>  2     0 89.87500           0
+#>  3     0 89.79167           0
+#>  4     0 89.70834           0
+#>  5     0 89.62500           0
+#>  6     0 89.54167           0
+#>  7     0 89.45834           0
+#>  8     0 89.37500           0
+#>  9     0 89.29167           0
+#> 10     0 89.20834           0
 #> # ... with 6,729 more rows
-#> [1] "groups"
-#> # A tibble: 3 × 6
+#> [1] "group"
+#> # A tibble: 3 x 7
 #>      id               name ndims nvars natts
 #>   <int>              <chr> <int> <int> <int>
 #> 1 65536                        4     4    65
 #> 2 65537 processing_control     0     0     4
 #> 3 65538   input_parameters     0     0    21
-#> # ... with 1 more variables: fqgn <chr>
+#> # ... with 2 more variables: fqgn <chr>, .group_ <int>
 #> [1] "file"
-#> # A tibble: 1 × 10
+#> # A tibble: 1 x 11
 #>                                                                      filename
 #>                                                                         <chr>
 #> 1 /perm_storage/home/mdsumner/R/x86_64-pc-linux-gnu-library/3.4/ncdump/extdat
-#> # ... with 9 more variables: writable <lgl>, id <int>, safemode <lgl>,
+#> # ... with 10 more variables: writable <lgl>, id <int>, safemode <lgl>,
 #> #   format <chr>, is_GMT <lgl>, ndims <dbl>, natts <dbl>,
-#> #   unlimdimid <dbl>, nvars <dbl>
+#> #   unlimdimid <dbl>, nvars <dbl>, .file_ <int>
 #> [1] "variable"
-#> # A tibble: 2 × 18
+#> # A tibble: 2 x 18
 #>      name ndims natts          prec   units
 #>     <chr> <int> <int>         <chr>   <chr>
 #> 1 chlor_a     2    12         float mg m^-3
 #> 2 palette     2     0 unsigned byte        
 #> # ... with 13 more variables: longname <chr>, group_index <int>,
 #> #   storage <int>, shuffle <int>, compression <int>, unlim <lgl>,
-#> #   make_missing_value <lgl>, missval <dbl>, hasAddOffset <lgl>,
-#> #   addOffset <dbl>, hasScaleFact <lgl>, scaleFact <dbl>, id <dbl>
+#> #   make_missing_value <lgl>, hasAddOffset <lgl>, addOffset <dbl>,
+#> #   hasScaleFact <lgl>, scaleFact <dbl>, .variable_ <dbl>, .group_ <int>
 #> [1] "vardim"
-#> # A tibble: 4 × 2
-#>      id dimids
-#>   <dbl>  <int>
-#> 1     0      1
-#> 2     0      0
-#> 3     3      3
-#> 4     3      2
+#> # A tibble: 4 x 2
+#>   .variable_ .dimension_
+#>        <dbl>       <int>
+#> 1          0           1
+#> 2          0           0
+#> 3          3           3
+#> 4          3           2
 #> [1] "attribute"
 #> [1] "NetCDF attributes:"
 #> [1] "Global"
 #> [1] "\n"
-#> # A tibble: 1 × 65
+#> # A tibble: 1 x 65
 #>                          product_name instrument
 #>                                 <chr>      <chr>
 #> 1 S2008001.L3m_DAY_CHL_chlor_a_9km.nc    SeaWiFS

@@ -6,7 +6,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>All news • ncdump</title>
+<title>importFrom ncdf4 nc_open nc_close
+.varnames &lt;- function(x) 
+names(.ndims(x))
+
+.ndims &lt;- function(x) 
+nc &lt;- nc_open(x)
+dims &lt;- sapply(nc$var, "[[", "ndims")
+nc_close(nc)
+dims — ncatts • ncdump</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -36,7 +44,7 @@
   </head>
 
   <body>
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -74,42 +82,51 @@
       </header>
 
       <div class="row">
-
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Change log <small>All releases</small></h1>
+    <h1>importFrom ncdf4 nc_open nc_close
+.varnames &lt;- function(x) 
+names(.ndims(x))
+
+.ndims &lt;- function(x) 
+nc &lt;- nc_open(x)
+dims &lt;- sapply(nc$var, "[[", "ndims")
+nc_close(nc)
+dims</h1>
     </div>
 
-    <div class="contents">
-    <div id="ncdump-0-0-3-9001" class="section level1">
-<h1 class="hasAnchor">
-<a href="#ncdump-0-0-3-9001" class="anchor"></a>ncdump 0.0.3.9001</h1>
-<ul>
-<li><p>now importing rlang and tibble</p></li>
-<li><p>ncdump is now compatible with package tidync</p></li>
-</ul>
-</div>
-    <div id="ncdump-0-0-3" class="section level1">
-<h1 class="hasAnchor">
-<a href="#ncdump-0-0-3" class="anchor"></a>ncdump 0.0.3</h1>
-<ul>
-<li><p>initial release</p></li>
-<li><p>ported from rancid</p></li>
-</ul>
-</div>
-    </div>
+    
+    <p>importFrom ncdf4 nc_open nc_close
+.varnames &lt;- function(x) 
+names(.ndims(x))
+
+    .ndims &lt;- function(x) 
+nc &lt;- nc_open(x)
+dims &lt;- sapply(nc$var, "[[", "ndims")
+nc_close(nc)
+dims</p>
+    
+
+    <pre class="usage"><span class='fu'>ncatts</span>(<span class='no'>x</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>file path</p></td>
+    </tr>
+    </table>
+    
+
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#ncdump-0-0-3-9001">0.0.3.9001</a></li>
-        <li><a href="#ncdump-0-0-3">0.0.3</a></li>
-      </ul>
-    </div>
-  </div>
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+                </ul>
 
+  </div>
 </div>
 
       <footer>
