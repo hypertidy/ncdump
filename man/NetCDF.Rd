@@ -45,6 +45,7 @@ Currently 'file' is expected to and treated as having only one row, but future v
 as a single entity.
 
 The 'ncdump -h' print summary above is analogous to the print method \link[ncdf4:print.ncdf4]{ncdf4::print.ncdf4} of the output of \link[ncdf4:nc_open]{ncdf4::nc_open}.
+The approach here is under review, probably forever. https://github.com/r-gris/ncdump/issues/8
 }
 \examples{
 rnc <- NetCDF(system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package= "ncdump"))

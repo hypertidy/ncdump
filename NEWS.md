@@ -1,5 +1,7 @@
 # ncdump 0.0.3.9001
 
+* hacky workaround implemented to avoid weird dimvals (WIP)
+
 * now importing rlang and tibble
 
 * ncdump is now compatible with package tidync

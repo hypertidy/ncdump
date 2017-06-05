@@ -83,6 +83,7 @@ ncatts.character <- function(x) {
 #'  as a single entity. 
 #'  
 #'  The 'ncdump -h' print summary above is analogous to the print method [ncdf4::print.ncdf4] of the output of [ncdf4::nc_open]. 
+#'  The approach here is under review, probably forever. https://github.com/r-gris/ncdump/issues/8
 #' @param x path to NetCDF file
 #' @export
 #' @importFrom ncdf4 nc_open
@@ -98,10 +99,18 @@ NetCDF <- function(x) {
   nc <- ncdf4::nc_open(x)
   dimension <- dplyr::bind_rows(lapply(nc$dim, function(x) tibble::as_tibble(x[!names(x) %in% c("dimvarid", "vals", "units", "calendar")])))
   unlimdims <- NULL
-  if (any(dimension$unlim)) unlimdims <- dplyr::bind_rows(lapply( nc$dim[dimension$unlim], function(x) dplyr::tibble(x[names(x) %in% c("id", "units", "calendar")])))
+  if (any(dimension$unlim)) unlimdims <- dplyr::bind_rows(lapply( nc$dim[dimension$unlim], function(x) dplyr::tibble(x[names(x) %in% c("id", "vals", "units", "calendar")])))
   ## do we care that some dims are degenerate 1D?
   ##lapply(nc$dim, function(x) dim(x$vals))
-  dimension_values <- dplyr::bind_rows(lapply(nc$dim, function(x) dplyr::tibble(id = rep(x$id, length(x$vals)), vals = x$vals)))
+  #split_if_character <- function(x) switch(mode(x), character = unlist(strsplit(x, "\\s+")), numeric = x)
+  #null_if_char <- function(x) 
+weird_char_dimvals <- unlist(lapply(nc$dim, function(x) is.character(x$vals)))
+    dimension_values <- dplyr::bind_rows(
+    lapply(nc$dim[!weird_char_dimvals], function(x) {
+      ## some of these are matrices
+      tibble::tibble(id = rep(x$id, length(x$vals)), vals = as.vector(x$vals))
+    })
+    )
   ## the dimids are in the dims table above
   group <- dplyr::bind_rows(lapply(nc$groups, function(x) tibble::as_tibble(x[!names(x) %in% "dimid"]))) 
   ## leave the fqgn2Rindex for now
