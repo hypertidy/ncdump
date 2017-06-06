@@ -118,7 +118,7 @@ weird_char_dimvals <- unlist(lapply(nc$dim, function(x) is.character(x$vals)))
   ## when we drop these, how do we track keeping them elsewhere?
   variable <- dplyr::bind_rows(lapply(nc$var, function(x) tibble::as_tibble(x[!names(x) %in% c("chunksizes", "id", "dims", "dim", "missval", "varsize", "size", "dimids")])))
   variable$.variable_ <- sapply(nc$var, function(x) x$id$id)
-  variable_link_dimension <- dplyr::bind_rows(lapply(nc$var, function(x) tibble(.variable_ = rep(x$id$id, length(x$dimids)), .dimension_ = x$dimids)))
+  variable_link_dimension <- dplyr::bind_rows(lapply(nc$var, function(x) tibble::tibble(.variable_ = rep(x$id$id, length(x$dimids)), .dimension_ = x$dimids)))
   ## read attributes, should be made optional (?) to avoid long read time
   atts <- ncatts(x)
   class(atts) <- c("NetCDF_attributes", "list")
