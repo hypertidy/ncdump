@@ -9,7 +9,7 @@ Description: Tools for handling 'NetCDF' metadata in data frames. The metadata i
 License: GPL-3
 LazyData: true
 Imports:
-    dplyr,
+    dplyr (>= 0.7.0),
     ncdf4, 
     rlang, 
     tibble
