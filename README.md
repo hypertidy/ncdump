@@ -1,6 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Travis-CI Build Status](https://travis-ci.org/r-gris/ncdump.svg?branch=master)](https://travis-ci.org/r-gris/ncdump) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/r-gris/ncdump?branch=master&svg=true)](https://ci.appveyor.com/project/r-gris/ncdump) [![Coverage Status](https://img.shields.io/codecov/c/github/r-gris/ncdump/master.svg)](https://codecov.io/github/r-gris/ncdump?branch=master) [![](http://www.r-pkg.org/badges/version/ncdump)](http://www.r-pkg.org/pkg/ncdump)
+[![Travis-CI Build Status](https://travis-ci.org/hypertidy/ncdump.svg?branch=master)](https://travis-ci.org/hypertidy/ncdump) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/hypertidy/ncdump?branch=master&svg=true)](https://ci.appveyor.com/project/hypertidy/ncdump) [![Coverage Status](https://img.shields.io/codecov/c/github/hypertidy/ncdump/master.svg)](https://codecov.io/github/hypertidy/ncdump?branch=master) [![](http://www.r-pkg.org/badges/version/ncdump)](http://www.r-pkg.org/pkg/ncdump)
 
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/ncdump)](http://www.r-pkg.org/pkg/ncdump)
 
@@ -68,7 +68,7 @@ for (i in seq_along(con)) {
 #> # A tibble: 1 x 11
 #>                                                                      filename
 #>                                                                         <chr>
-#> 1 /perm_storage/home/mdsumner/R/x86_64-pc-linux-gnu-library/3.4/ncdump/extdat
+#> 1 /usr/local/lib/R/site-library/ncdump/extdata/S2008001.L3m_DAY_CHL_chlor_a_9
 #> # ... with 10 more variables: writable <lgl>, id <int>, safemode <lgl>,
 #> #   format <chr>, is_GMT <lgl>, ndims <dbl>, natts <dbl>,
 #> #   unlimdimid <dbl>, nvars <dbl>, .file_ <int>

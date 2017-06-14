@@ -18,6 +18,6 @@ Suggests: testthat,
     knitr,
     rmarkdown,
     covr
-URL: https://github.com/r-gris/ncdump
-BugReports: https://github.com/r-gris/ncdump/issues
+URL: https://github.com/hypertidy/ncdump
+BugReports: https://github.com/hypertidy/ncdump/issues
 Roxygen: list(markdown = TRUE)

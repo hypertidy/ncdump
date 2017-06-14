@@ -15,9 +15,9 @@ library(ncdump)
 
 ```
 
-[![Travis-CI Build Status](https://travis-ci.org/r-gris/ncdump.svg?branch=master)](https://travis-ci.org/r-gris/ncdump)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/r-gris/ncdump?branch=master&svg=true)](https://ci.appveyor.com/project/r-gris/ncdump)
-[![Coverage Status](https://img.shields.io/codecov/c/github/r-gris/ncdump/master.svg)](https://codecov.io/github/r-gris/ncdump?branch=master)
+[![Travis-CI Build Status](https://travis-ci.org/hypertidy/ncdump.svg?branch=master)](https://travis-ci.org/hypertidy/ncdump)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/hypertidy/ncdump?branch=master&svg=true)](https://ci.appveyor.com/project/hypertidy/ncdump)
+[![Coverage Status](https://img.shields.io/codecov/c/github/hypertidy/ncdump/master.svg)](https://codecov.io/github/hypertidy/ncdump?branch=master)
 [![](http://www.r-pkg.org/badges/version/ncdump)](http://www.r-pkg.org/pkg/ncdump)
 
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/ncdump)](http://www.r-pkg.org/pkg/ncdump)

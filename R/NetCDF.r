@@ -83,7 +83,7 @@ ncatts.character <- function(x) {
 #'  as a single entity. 
 #'  
 #'  The 'ncdump -h' print summary above is analogous to the print method [ncdf4::print.ncdf4] of the output of [ncdf4::nc_open]. 
-#'  The approach here is under review, probably forever. https://github.com/r-gris/ncdump/issues/8
+#'  The approach here is under review, probably forever. https://github.com/hypertidy/ncdump/issues/8
 #' @param x path to NetCDF file
 #' @export
 #' @importFrom ncdf4 nc_open
