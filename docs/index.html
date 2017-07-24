@@ -29,7 +29,25 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
+  <a href="/index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="articles/netcdf-library.html">R and the NetCDF library</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="news/index.html">News</a>
@@ -65,7 +83,7 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#netcdf-metadata-in-tables-in-r" class="anchor"></a>NetCDF metadata in tables in R</h1></div>
 <p>The <code>ncdump</code> package aims to simplify the way we can approach NetCDF in R.</p>
-<p>Currently the only real functionality is to return the complete file metadata in tidy form. There is some experimental function to return specific entities, but in my experience the existing tools <code>ncdf4</code>, <code>raster</code>, <code>rgdal</code>, <code>RNetCDF</code> and <code>rhdf5</code> are sufficient for easily accessing almost everything. Where they fall down is in providing easy and complete information about what is available in the files, so that’s where <code>ncdump::NetCDF</code> comes in.</p>
+<p>Currently the only real functionality is to return the complete file metadata in tidy form. There is some experimental function to return specific entities, but in my experience the existing tools <code>ncdf4</code>, <code>raster</code>, <code>rgdal</code>, <code>RNetCDF</code> and <code>rhdf5</code> are sufficient for easily accessing almost everything. Where they fall down is in providing easy and complete information about what is available in the files, so that’s where <code><a href="http://www.rdocumentation.org/packages/ncdump/topics/NetCDF">ncdump::NetCDF</a></code> comes in.</p>
 <p>Create an object that has a complete description of the file so that we can easily see the available <strong>variables</strong> and <strong>dimensions</strong> and <strong>attributes</strong>, and perform queries that find the details we need in a form we can used, rather than just printed out on the screen.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 <span class="kw">library</span>(ncdump)
@@ -116,7 +134,7 @@ con &lt;-<span class="st"> </span><span class="kw"><a href="reference/NetCDF.htm
 <span class="co">#&gt; # A tibble: 1 x 11</span>
 <span class="co">#&gt;                                                                      filename</span>
 <span class="co">#&gt;                                                                         &lt;chr&gt;</span>
-<span class="co">#&gt; 1 /usr/local/lib/R/site-library/ncdump/extdata/S2008001.L3m_DAY_CHL_chlor_a_9</span>
+<span class="co">#&gt; 1 /perm_storage/home/mdsumner/R/x86_64-pc-linux-gnu-library/3.4/ncdump/extdat</span>
 <span class="co">#&gt; # ... with 10 more variables: writable &lt;lgl&gt;, id &lt;int&gt;, safemode &lt;lgl&gt;,</span>
 <span class="co">#&gt; #   format &lt;chr&gt;, is_GMT &lt;lgl&gt;, ndims &lt;dbl&gt;, natts &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   unlimdimid &lt;dbl&gt;, nvars &lt;dbl&gt;, .file_ &lt;int&gt;</span>
@@ -199,7 +217,8 @@ con &lt;-<span class="st"> </span><span class="kw"><a href="reference/NetCDF.htm
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Links</h2>
+    <h2 class="hasAnchor">
+<a href="#sidebar" class="anchor"></a>Links</h2>
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cran.r-project.org/package=ncdump">https://​cran.r-project.org/​package=ncdump</a>
 </li>

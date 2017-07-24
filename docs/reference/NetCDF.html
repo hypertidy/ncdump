@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -51,7 +52,25 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="..//index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/netcdf-library.html">R and the NetCDF library</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -109,29 +128,29 @@ contents of the files. This function doesn't do anything with the data, and
 it doesn't access any of the data.</p>
 <p>A NetCDF file contains the following entities, and each gets a data frame in the resulting object:</p><table><tr><td>
 <code>attribute</code> </td>
-</tr><tr><td> 'attributes' are general metadata about the file and its variables and dimensions</td>
+<td> 'attributes' are general metadata about the file and its variables and dimensions</td>
 </tr><tr><td>
 <code>dimension</code> </td>
-</tr><tr><td> 'dimensions' are the axes defining the space of the data variables </td>
+<td> 'dimensions' are the axes defining the space of the data variables </td>
 </tr><tr><td>
 <code>variable</code> </td>
-</tr><tr><td> 'variables' are the actual data, the arrays containing data values </td>
+<td> 'variables' are the actual data, the arrays containing data values </td>
 </tr><tr><td>
 <code>group</code> </td>
-</tr><tr><td> 'groups' are an internal abstraction to behave as a collection, analogous to a file. </td>
+<td> 'groups' are an internal abstraction to behave as a collection, analogous to a file. </td>
 </tr></table>
     <p>In addition to a data for each of the main entities above 'NetCDF' also creates:</p><table><tr><td>
 <code>unlimdims</code> </td>
-</tr><tr><td> the unlimited dimensions identify those which are not a constant lenghth (i.e. spread over files) </td>
+<td> the unlimited dimensions identify those which are not a constant lenghth (i.e. spread over files) </td>
 </tr><tr><td>
 <code>dimvals</code> </td>
-</tr><tr><td> a link table between dimensions and its coordinates </td>
+<td> a link table between dimensions and its coordinates </td>
 </tr><tr><td>
 <code>file</code> </td>
-</tr><tr><td> information about the file itself </td>
+<td> information about the file itself </td>
 </tr><tr><td>
 <code>vardim</code> </td>
-</tr><tr><td> a link table between variables and their dimensions </td>
+<td> a link table between variables and their dimensions </td>
 </tr></table>
     <p>Currently 'file' is expected to and treated as having only one row, but future versions may treat a collection of files
 as a single entity.</p>

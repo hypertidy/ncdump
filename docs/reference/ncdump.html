@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -51,7 +52,25 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="..//index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/netcdf-library.html">R and the NetCDF library</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -81,15 +100,15 @@
 
     
     <p>Provides a useable data structure of NetCDF metadata
-NetCDF is Network Common Data Form <a href = 'https://www.unidata.ucar.edu/software/netcdf/'>https://www.unidata.ucar.edu/software/netcdf/</a>.</p>
+NetCDF is Network Common Data Form <a href='https://www.unidata.ucar.edu/software/netcdf/'>https://www.unidata.ucar.edu/software/netcdf/</a>.</p>
     
 
         
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>There is one main function:</p><table><tr><td>
+    <p>There is one main function, returning an object of class "ncdump":</p><table><tr><td>
 <code><a href='NetCDF.html'>NetCDF</a></code> </td>
-</tr><tr><td> produces a list of data frames containing metadata from a NetCDF file</td>
+<td> produces a list of data frames containing metadata from a NetCDF file</td>
 </tr></table>
     
 

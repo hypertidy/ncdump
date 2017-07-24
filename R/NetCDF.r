@@ -137,7 +137,7 @@ weird_char_dimvals <- unlist(lapply(nc$dim, function(x) is.character(x$vals)))
             unlimdims = unlimdims, 
             dimension_values = dimension_values, group = group, file = file, variable = variable, 
             vardim = variable_link_dimension, attribute = atts)
-  class(x) <- c("NetCDF", "list")
+  class(x) <- c("ncdump", "list")
   x
 }
 #' @importFrom utils head
@@ -164,7 +164,7 @@ vars <- function(x, ...) UseMethod("vars")
 
 #' @rdname vars
 #' @noRd
-vars.NetCDF <- function(x, ...) {
+vars.ncdump <- function(x, ...) {
   x$variable
 }
 
@@ -173,7 +173,7 @@ vars.NetCDF <- function(x, ...) {
 dims <- function(x, ...) UseMethod("dims")
 #' @rdname vars
 #' @noRd
-dims.NetCDF <- function(x, ...) {
+dims.ncdump <- function(x, ...) {
   x$dimension
 }
 
@@ -184,7 +184,7 @@ dimvars <- function(x, ...) UseMethod("dimvars")
 #' @rdname vars
 #' @noRd
 #' @importFrom dplyr %>% arrange_ filter filter_  inner_join select select_
-dimvars.NetCDF <- function(x, ...) {
+dimvars.ncdump <- function(x, ...) {
   dmv <- (dims(x) %>% filter_("create_dimvar") %>% select_("name"))$name
   ndv <- length(dmv)
   ndims <- rep(0, ndv)
@@ -209,7 +209,7 @@ atts <- function(x, ...) {
 
 #' @rdname vars
 #' @noRd
-atts.NetCDF <- function(x, varname = "globalatts", ...) {
+atts.ncdump <- function(x, varname = "globalatts", ...) {
   if (varname == "globalatts") {
     x$attribute$global 
   } else {
@@ -221,7 +221,7 @@ atts.NetCDF <- function(x, varname = "globalatts", ...) {
 }
 
 #' @importFrom dplyr filter_
-"[[.NetCDF" <- function(x,i,j,...,drop=TRUE) {
+"[[.ncdump" <- function(x,i,j,...,drop=TRUE) {
   var <-  filter_(x$variable, .dots = list(~name == i))
   class(var) <- c("NetCDFVariable", class(var))
   var

@@ -1,0 +1,69 @@
+---
+title: "R and the NetCDF library"
+author: "Michael D. Sumner"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{R and the NetCDF library}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+This package `ncdump` was an early attempt to support a tidyverse-inspired package for R. 
+
+The key idea is to integrate interactive exploration of what is in the source with lazy-specification of subset requests - so the *user or developer* gets helpers that show the data available, the axes available for "slicing", the impact of coordinate- or index-based filter-expressions using dplyr idioms, and then the indexes that the raw API understands for a given slice. It means any data-read can be "lazy", delayed until the last moment at which the choice of output form is made (long-form data frame, raw array, bespoke format such as `raster`, `image`, etc.). 
+
+This work needed a systematic "metadata-extraction" language, and currently ncmeta/tidync are the core of that, wrapping ncdf4 and RNetCDF and other exploratory wrappings of `rhdf5` and `rgdal` for other cases. Some poor choices were made in an early version "ncdump" on CRAN (basically class "NetCDF" already used by `RNetCDF`), and so current direction involves streamlining `ncdump` with `ncmeta` then getting the `tidync` package onto CRAN. 
+
+# Why so many NetCDF packages? 
+
+Support in R for NetCDF is piecemeal and fragmented. The following sections describe the various facilities of this format and the
+patchy suppport for them in various R packages. 
+
+## NetCDF classic (version 3)
+
+The "original" format of NetCDF was pretty straightforward. A source could have variables, dimensions and attributes. This is well supported by `RNetCDF` and `ncdf4` on CRAN, both of which are provided for multiple architectures (Windows and MacOS). This was also supported by `ncdf`, but that was superseded by `ncdf4` (by the same author) and `ncdf` is now removed from CRAN (end of 2015). 
+
+When `ncdf` was removed from CRAN the `raster` package also updated and removed its references to that package. It had previously used `ncdf4` in preference, deferring to `ncdf` when required i.e. on Windows. 
+
+The `rgdal` package can include the NetCDF library as a driver, but no CRAN build has ever done so. Unlike `raster` the use of the NetCDF library by GDAL is independent of these other R packages, and users are expected to build it in if it's required (true for many other drivers). 
+
+The relationship between `raster` and `rgdal` is a little complex, since `raster` has an independent interpretation of these sources that uses `ncdf4` directly, but after checking and failing for its own support for a read `raster` will fall back and see if `rgdal` can provide read from a source - but the user cannot request that raster go via rgdal without masking the `ncdf4` package visibility. The model interpreation provided by `raster` and `rgdal` is analogous, but different and independent. They may  "fail to support" a given soure for the same broad reason, but the details can be very different. 
+
+
+## NetCDF modern (version 4)
+
+This was a complex update to NetCDF, essentially a re-engineering of the library from HDF5. It enabled a number of new facilities: 
+
+* groups (heirarchical structure within a source, like a file system - directories of variables)
+* internal compression
+* "chunking" (i.e. multi-dimensional tiling, the layout on disk of the values relative to the logical layout of the array)
+* compound types (struct-like custom data types, commonly used to approximate "tables" i.e. sets of same-length-different-type 1-D arrays)
+
+The `ncdf4` package in its original form supported all of these new features except for compound types, and it also supports the classic "version 3" forms. 
+
+Both `raster` and `rgdal` support NetCDF in all cases above for NetCDF version 4 apart from compound types. The specification of a source withingroups is quite specific though and there's little exercise of how these packages relate to them. Neither support "non-regular" non-affine-based georeferencing - both rely on the rectilinear-axes-coordinate model used by NetCDF being degenerate-rectilinear -  but again the heuristics applied are different for different sources and so this is a complex area to summarize. 
+
+
+The `rhdf5` package supports NetCDF version 4 including compound types. Specifically, it has a straightforward way to read these as data frames when it makes sense to do so. There's no limit on what NetCDF version 4 can be read, but the interpreation is very much lower-level than either `raster` or `rgdal`. This package is on Bioconductor, so it obscure to the normal CRAN user but it is supported cross platform. `rhdf5` cannot read the classic form NetCDF version 3 format. 
+
+## DODS, OpenDAP, Thredds
+
+(DODS is the old system, sequentially replaced by OpenDAP and now Thredds - these are synonymous terms as far as I know, but "DODS" is the name of the GDAL driver, for raster and vector sources).
+
+The NetCDF driver can be OpenDAP-aware.  The missing OpenDAP support for Windows / MacOS is a lower level shared library issue that is a problem with the Windows ncdf4 and RNetCDF packages as well.
+
+ GDAL has an independent driver DODS, but NetCDF itself can also be DODS/OpenDAP capable. Similar overlap occurs with NetCDF(4) and HDF5, and you can see conflicts with raw HTTP sources and these DODS/OpenDAP/Thredds sources because the "same syntax" triggers driver-choice on connect. All driver conflicts within a given GDAL build can be resolved by prepending the driver identifier to the data source string, as far as I know.
+
+Both `RNetCDF` and `ncdf4` support these server systems when the library is configured for its support (so usually only Linux users who can install the requirements). NetCDF can be installed from source and configured with these options, or installed from distros - essentially the unstable-ubuntu-gis stack + libdnetcdf-dev is the simplest way. 
+
+
+## Other discussions
+
+R-spatial GDAL: https://github.com/r-spatial/discuss/issues/14
+
+RConsortium wishlist: https://github.com/RConsortium/wishlist/issues/3
+
+netcdf channel on https://ropensci.slack.com
+
+
