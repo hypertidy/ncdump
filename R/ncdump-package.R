@@ -8,5 +8,4 @@
 #'  \code{\link{NetCDF}} \tab produces a list of data frames containing metadata from a NetCDF file\cr
 #'  }
 #' @name ncdump
-#' @docType package
-NULL
+"_PACKAGE"

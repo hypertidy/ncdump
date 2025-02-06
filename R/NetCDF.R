@@ -1,27 +1,6 @@
-#' importFrom ncdf4 nc_open nc_close
-#' .varnames <- function(x) {
-#'   names(.ndims(x))
-#' }
-#' .ndims <- function(x) {
-#'   nc <- nc_open(x)
-#'   dims <- sapply(nc$var, "[[", "ndims")
-#'   nc_close(nc)
-#'   dims
-#' }
 
-# .dimnames <- function(x, varname) {
-#   nc <- nc_open(x)
-#   names(nc$dim[nc$var[[varname]]$dimids])
-# }
 
-## turn this off
-# varcoords <- function(x, varname) {
-#   x <- NetCDF(x)
-#    arrange_(inner_join(select_(inner_join(dplyr::filter(x$variable, .dots = list(~name == varname)), x$vardim), "id", "dimids"), x$dimension, c("dimids" = "id")), "dimids")$name
-# }
 
-#' @keywords internal
-#' @param x file path 
 ncatts <- function(x) {
   UseMethod("ncatts")
 }
@@ -227,11 +206,12 @@ atts.ncdump <- function(x, varname = "globalatts", ...) {
   var
 }
 
+#' @export
 print.NetCDFVariable <- function(x, ...) {
   print(t(as.matrix(x)))
 }
 
-#library(lazyeval)
+#' @export
 "[.NetCDFVariable" <- function(x, i, j, ..., drop = TRUE) {
   # il <- lazy(i)
   # jl <- lazy(j)
