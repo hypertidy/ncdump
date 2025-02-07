@@ -20,7 +20,7 @@ The key idea is to integrate interactive exploration of what is in the source wi
 
 This would provide facility for any data-read to be "lazy", delayed until the last moment at which the choice of output form is made (long-form data frame, raw array, bespoke format such as `raster`, `image`, streaming to another service on-demand etc.). 
 
-https://github.com/hypertidy/tidync
+https://github.com/ropensci/tidync
 
 This work needed a systematic "metadata-extraction" language, and currently `ncmeta`/`tidync` are the core of that, wrapping `ncdf4` and `RNetCDF` and other exploratory wrappings of `rhdf5` and `rgdal` for other cases. 
 
@@ -76,9 +76,9 @@ Both `RNetCDF` and `ncdf4` support these server systems when the library is conf
 Both `RNetCDF` and `ncdf4` support groups **but** neither will list the contents of any group that contains compound types, so we don't notice at the R level that the groups with those types are silently ignored - unless they are the only type in the file - and we notice because it simply fails to work at all. 
 
 NOTE: I am referring to the current CRAN version of RNetCDF 1.8-2 - the development version on R-forge already 
-has new support for version 4.0 and groups. 
+has new support for version 4.0 and groups.  (that was from 2017). 
 
-http://r-forge.r-project.org/R/?group_id=2008
+RNetCDF source now lives here: https://github.com/mjwoods/RNetCDF
 
 
 Supporting groups in full requires a re-write, a super-package to transcend `ncdf4`, `RNetCDF` and `rhdf5` - wrappers at the R level could drive these for a virtual super-package, but it's complicated by the cross-platform problems. 

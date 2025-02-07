@@ -1,16 +1,15 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- badges: start -->
 
-[![Travis-CI Build
-Status](https://travis-ci.org/hypertidy/ncdump.svg?branch=master)](https://travis-ci.org/hypertidy/ncdump)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/hypertidy/ncdump?branch=master&svg=true)](https://ci.appveyor.com/project/hypertidy/ncdump)
-[![Coverage
-Status](https://img.shields.io/codecov/c/github/hypertidy/ncdump/master.svg)](https://codecov.io/github/hypertidy/ncdump?branch=master)
-[![](http://www.r-pkg.org/badges/version/ncdump)](http://www.r-pkg.org/pkg/ncdump)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/ncdump)](https://CRAN.R-project.org/package=ncdump)
+<!-- badges: end -->
 
-[![CRAN RStudio mirror
-downloads](http://cranlogs.r-pkg.org/badges/ncdump)](http://www.r-pkg.org/pkg/ncdump)
+Please note: the ideas in the this package were taken forward in
+[tidync](https://CRAN.R-project.org/package=tidync) and
+[ncmeta](https://CRAN.R-project.org/package=ncmeta) which are probably
+the packages you should use instead.
 
 # NetCDF metadata in tables in R
 
@@ -190,8 +189,11 @@ read, but each is useful in different ways. The main ones are `RNetCDF`,
 `ncdf4` and `rhdf5` (Bioconductor).
 
 This project was split out of the “R and NetCDF interface development”
-project. <https://github.com/mdsumner/rancid>
+project. <https://github.com/hypertidy/rancid>
 
-Please note that this project is released with a [Contributor Code of
-Conduct](CONDUCT.md). By participating in this project you agree to
-abide by its terms.
+## Code of Conduct
+
+Please note that the ncdump project is released with a [Contributor Code
+of
+Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.

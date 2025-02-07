@@ -13,3 +13,4 @@ docs
 ^docs$
 ^ncdump\.Rproj$
 ^.github$
+^CODE_OF_CONDUCT\.md$
