@@ -40,7 +40,7 @@ When `ncdf` was removed from CRAN the `raster` package also updated and removed 
 
 The `rgdal` package can include the NetCDF library as a driver, but no CRAN build has ever done so. Unlike `raster` the use of the NetCDF library by GDAL is independent of these other R packages, and users are expected to build it in if it's required (true for many other drivers). 
 
-The relationship between `raster` and `rgdal` is a little complex, since `raster` has an independent interpretation of these sources that uses `ncdf4` directly, but after checking and failing for its own support for a read `raster` will fall back and see if `rgdal` can provide read from a source - but the user cannot request that raster go via rgdal without masking the `ncdf4` package visibility. The model interpreation provided by `raster` and `rgdal` is analogous, but different and independent. They may  "fail to support" a given source for the same broad reason, but the details can be very different. 
+The relationship between `raster` and `rgdal` is a little complex, since `raster` has an independent interpretation of these sources that uses `ncdf4` directly, but after checking and failing for its own support for a read `raster` will fall back and see if `rgdal` can provide read from a source - but the user cannot request that raster go via rgdal without masking the `ncdf4` package visibility. The model interpretation provided by `raster` and `rgdal` is analogous, but different and independent. They may  "fail to support" a given source for the same broad reason, but the details can be very different. 
 
 
 ## NetCDF modern (version 4)

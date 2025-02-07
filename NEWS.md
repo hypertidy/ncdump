@@ -1,3 +1,7 @@
+# ncdump 0.0.5
+
+* Small package fixes, and fixed a CRAN note. 
+
 # ncdump 0.0.4
 
 * renamed class "NetCDF" to "ncdump", to avoid clash with RNetCDF (undoing a poor choice originally for this package)

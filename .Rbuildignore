@@ -12,3 +12,4 @@ docs
 ^CONDUCT\.md$
 ^docs$
 ^ncdump\.Rproj$
+^.github$

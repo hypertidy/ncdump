@@ -51,7 +51,7 @@ ncatts.character <- function(x) {
 #'  
 #'  In addition to a data for each of the main entities above 'NetCDF' also creates:  
 #'  \tabular{ll}{
-#'  \code{unlimdims} \tab the unlimited dimensions identify those which are not a constant lenghth (i.e. spread over files) \cr
+#'  \code{unlimdims} \tab the unlimited dimensions identify those which are not a constant length (i.e. spread over files) \cr
 #'  \code{dimvals} \tab a link table between dimensions and its coordinates \cr
 #'  \code{file} \tab information about the file itself \cr
 #'  \code{vardim} \tab a link table between variables and their dimensions \cr
